@@ -15,7 +15,7 @@ public abstract class Ente {
 	public EnteGrafico getGrafico() {
 		return grafico;
 	}
-	public void setGrafico(EnteGrafico grafico) {
-		this.grafico = grafico;
+	public void setGrafico(EnteGrafico g) {
+		this.grafico = g;
 	}
 }
