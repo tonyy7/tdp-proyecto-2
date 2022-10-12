@@ -26,5 +26,6 @@ public class SplashScreen extends JWindow {
 			System.out.println(e.getMessage());
 		}
 		setVisible(false);
+		
 	}
 }

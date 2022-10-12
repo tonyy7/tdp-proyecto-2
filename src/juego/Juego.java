@@ -17,7 +17,7 @@ public class Juego {
 	
 	public Juego(Puntaje puntajes) {
 		this.puntajes = puntajes;
-		snake = new Snake();
+		//snake = new Snake();
 	}
 	
 	public void actualizarCriatura() {

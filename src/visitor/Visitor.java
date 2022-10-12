@@ -19,9 +19,9 @@ public interface Visitor {
 	public int visitAlimento3(Alimento3 a);
 	public int visitAlimento4(Alimento4 a);
 	public int visitAlimento5(Alimento5 a);
-	public int visitCuerpo(Cuerpo c);
 	public int visitPowerUp1(PowerUp1 p);
 	public int visitPowerUp2(PowerUp2 p);
 	public int visitPowerUp3(PowerUp3 p);
+	public void visitCuerpo(Cuerpo c);
 	public void visitPared(Pared p);
 }

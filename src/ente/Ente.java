@@ -6,10 +6,10 @@ public abstract class Ente {
 	protected Position posicion;
 	protected EnteGrafico grafico;
 	
-	public Position getPosicion() {
+	public Position getPosition() {
 		return posicion;
 	}
-	public void setPosicion(Position posicion) {
+	public void setPosition(Position posicion) {
 		this.posicion = posicion;
 	}
 	public EnteGrafico getGrafico() {
