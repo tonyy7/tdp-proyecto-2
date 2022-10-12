@@ -18,5 +18,7 @@ public abstract class Alimento extends Ente {
 	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
 	}
+	public int getPuntaje() {
+		return  this.puntaje;}
 
 }
