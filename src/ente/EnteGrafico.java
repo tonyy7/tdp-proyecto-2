@@ -5,5 +5,6 @@ public class EnteGrafico{
 	public EnteGrafico(String url){
 		this.url=url;
 	}
-	public String getUrl() {return this.url;}
+	public void setSkin(String s) {this.url=s;}
+	public String getSkin() {return this.url;}
 }

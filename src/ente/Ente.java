@@ -18,5 +18,4 @@ public abstract class Ente {
 	public void setGrafico(EnteGrafico grafico) {
 		this.grafico = grafico;
 	}
-	
 }
