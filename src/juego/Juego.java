@@ -1,5 +1,8 @@
 package juego;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import gui.GUI;
 import puntaje.Puntaje;
 
@@ -10,8 +13,8 @@ public class Juego {
 	
 	protected Puntaje puntajes;
 	
-	public Juego() {
-		
+	public Juego(Puntaje puntajes) {
+		this.puntajes = puntajes;
 	}
 	
 	public void actualizarCriatura() {
@@ -27,7 +30,7 @@ public class Juego {
 	}
 	
 	public void gameOver() {
-		
+		puntajes.setPuntaje(puntajeActual);
 	}
 	
 	public void setPuntaje(Puntaje p) {
@@ -37,4 +40,6 @@ public class Juego {
 	public void aumentarNivel() {
 		
 	}
+	
+	
 }
