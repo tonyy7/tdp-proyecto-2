@@ -43,12 +43,15 @@ public class Grilla {
 			juego.gameOver();
 	}
 	
-	private void spawnConsumible() {
+	public void spawnConsumible() {
 		Ente e = nivelActual.getconsumible();
+		if(e == null) {
+			juego.aumentarNivel();
+		}
 		grid[e.getPosition().getX()][e.getPosition().getY()].addFirst(e);		
 	}
 	
 	public boolean estaVacia(Position pos) {
-		return grid[pos.getX()][pos.getY()].isEmpty();
+		return grid[pos.getX()][pos.getY()] == null;
 	}
 }
