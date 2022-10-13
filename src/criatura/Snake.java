@@ -13,10 +13,14 @@ import ente.pared.Pared;
 import ente.powerUp.PowerUp1;
 import ente.powerUp.PowerUp2;
 import ente.powerUp.PowerUp3;
+import grilla.Grilla;
+import juego.Juego;
 import visitor.Visitor;
 
 public class Snake implements Visitor{
 	protected String direccion;
+	protected Juego juego;
+	protected Grilla grilla;
 	protected LinkedList<Cuerpo> cuerpo;
 	protected static int TAMANIO = 3;
 	
@@ -24,9 +28,11 @@ public class Snake implements Visitor{
 	 * Crea una instancia de Snake en la posicion p y en la direccion
 	 * pasada por parametro.
 	 */
-	public Snake(Position p, String direccion) {
+	public Snake(Position p, String direccion, Juego juego, Grilla grilla) {
 		cuerpo = new LinkedList<Cuerpo>();
 		this.direccion = direccion;
+		this.juego = juego;
+		this.grilla = grilla;
 		init(p);
 	}
 	
@@ -117,63 +123,51 @@ public class Snake implements Visitor{
 		return toReturn;
 	}
 
-	@Override
 	public int visitAlimento1(Alimento1 a) {
-		// TODO Auto-generated method stub
-		return 0;
+		crecerNBloques(a.getBloque());
+		return a.getPuntaje();
 	}
 
-	@Override
 	public int visitAlimento2(Alimento2 a) {
-		// TODO Auto-generated method stub
-		return 0;
+		crecerNBloques(a.getBloque());
+		return a.getPuntaje();
 	}
 
-	@Override
 	public int visitAlimento3(Alimento3 a) {
-		// TODO Auto-generated method stub
-		return 0;
+		crecerNBloques(a.getBloque());
+		return a.getPuntaje();
 	}
 
-	@Override
 	public int visitAlimento4(Alimento4 a) {
-		// TODO Auto-generated method stub
-		return 0;
+		crecerNBloques(a.getBloque());
+		return a.getPuntaje();
 	}
 
-	@Override
 	public int visitAlimento5(Alimento5 a) {
-		// TODO Auto-generated method stub
-		return 0;
+		crecerNBloques(a.getBloque());
+		return a.getPuntaje();
 	}
 
-	@Override
 	public int visitPowerUp1(PowerUp1 p) {
-		// TODO Auto-generated method stub
-		return 0;
+		crecerNBloques(3);
+		return p.GetPuntaje();
 	}
 
-	@Override
 	public int visitPowerUp2(PowerUp2 p) {
-		// TODO Auto-generated method stub
-		return 0;
+		crecerNBloques(3);
+		return p.GetPuntaje();
 	}
 
-	@Override
 	public int visitPowerUp3(PowerUp3 p) {
-		// TODO Auto-generated method stub
-		return 0;
+		crecerNBloques(3);
+		return p.GetPuntaje();
 	}
 
-	@Override
 	public void visitCuerpo(Cuerpo c) {
-		// TODO Auto-generated method stub
-		
+		juego.gameOver();
 	}
 
-	@Override
 	public void visitPared(Pared p) {
-		// TODO Auto-generated method stub
-		
+		juego.gameOver();
 	}
 }
