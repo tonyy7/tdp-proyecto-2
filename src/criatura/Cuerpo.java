@@ -11,6 +11,12 @@ public class Cuerpo extends Ente {
 		this.posicion=p;
 		this.grafico=new EnteGrafico("ruta");
 	}
+	
+	public void setSkin(String url) {
+		this.grafico.setSkin(url);
+	}
+	
+	
 	public void accept(Visitor v) {
 		v.visitCuerpo(this);
 	}

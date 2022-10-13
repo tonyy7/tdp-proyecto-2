@@ -45,10 +45,12 @@ public class Snake implements Visitor{
 		Position posSiguiente;
 		Cuerpo insert;
 		cuerpo.add(new Cuerpo(p));
+		cuerpo.getFirst().setSkin("assets/snake/cabeza.png");
 		for(int i=1; i<TAMANIO; i++) {
 			posSiguiente = cuerpo.get(i).getPosition();
 			insert = new Cuerpo(new Position(posSiguiente.getX()-posDireccion.getX(), posSiguiente.getY()-posDireccion.getY()));
 			cuerpo.addLast(insert);
+			cuerpo.get(i).setSkin("assets/snake/cuerpo.png");
 		}
 	}
 	
@@ -133,44 +135,50 @@ public class Snake implements Visitor{
 		return toReturn;
 	}
 
-	public int visitAlimento1(Alimento1 a) {
+	public void visitAlimento1(Alimento1 a) {
 		crecerNBloques(a.getBloque());
-		return a.getPuntaje();
+		juego.sumarPuntos(a.getPuntaje());
 	}
 
-	public int visitAlimento2(Alimento2 a) {
+	public void visitAlimento2(Alimento2 a) {
 		crecerNBloques(a.getBloque());
-		return a.getPuntaje();
+		juego.sumarPuntos(a.getPuntaje());
 	}
 
-	public int visitAlimento3(Alimento3 a) {
+	public void visitAlimento3(Alimento3 a) {
 		crecerNBloques(a.getBloque());
-		return a.getPuntaje();
+		juego.sumarPuntos(a.getPuntaje());
 	}
 
-	public int visitAlimento4(Alimento4 a) {
+	public void visitAlimento4(Alimento4 a) {
 		crecerNBloques(a.getBloque());
-		return a.getPuntaje();
+		juego.sumarPuntos(a.getPuntaje());
 	}
 
-	public int visitAlimento5(Alimento5 a) {
+	public void visitAlimento5(Alimento5 a) {
 		crecerNBloques(a.getBloque());
-		return a.getPuntaje();
+		juego.sumarPuntos(a.getPuntaje());
 	}
 
-	public int visitPowerUp1(PowerUp1 p) {
+	/*
+	 * VER EL ORDEN DE CAMBIO DE SKIN
+	 */
+	public void visitPowerUp1(PowerUp1 p) {
+		cambiarSkin(p.getUrlCabeza(), p.getUrlCuerpo());
 		crecerNBloques(3);
-		return p.GetPuntaje();
+		juego.sumarPuntos(p.getPuntaje());
 	}
 
-	public int visitPowerUp2(PowerUp2 p) {
+	public void visitPowerUp2(PowerUp2 p) {
+		cambiarSkin(p.getUrlCabeza(), p.getUrlCuerpo());
 		crecerNBloques(3);
-		return p.GetPuntaje();
+		juego.sumarPuntos(p.getPuntaje());
 	}
 
-	public int visitPowerUp3(PowerUp3 p) {
+	public void visitPowerUp3(PowerUp3 p) {
+		cambiarSkin(p.getUrlCabeza(), p.getUrlCuerpo());
 		crecerNBloques(3);
-		return p.GetPuntaje();
+		juego.sumarPuntos(p.getPuntaje());
 	}
 
 	public void visitCuerpo(Cuerpo c) {
@@ -179,5 +187,12 @@ public class Snake implements Visitor{
 
 	public void visitPared(Pared p) {
 		juego.gameOver();
+	}
+	
+	private void cambiarSkin(String urlCabeza, String urlCuerpo) {
+		cuerpo.getFirst().setSkin(urlCabeza);
+		for(int i=2; i<cuerpo.size(); i++) {
+			cuerpo.get(i).setSkin(urlCuerpo);
+		}
 	}
 }

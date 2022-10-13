@@ -1,6 +1,7 @@
 package ente;
 
 import Position.Position;
+import visitor.Visitor;
 
 public abstract class Ente {
 	protected Position posicion;
@@ -18,4 +19,10 @@ public abstract class Ente {
 	public void setGrafico(EnteGrafico g) {
 		this.grafico = g;
 	}
+	
+	public String getSkin() {
+		return grafico.getSkin();
+	}
+	
+	public abstract void accept(Visitor v);
 }

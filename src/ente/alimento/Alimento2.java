@@ -10,7 +10,7 @@ public class Alimento2 extends Alimento {
 		this.puntaje=35;
 		this.posicion=p;
 		//Agregar ruta de la imagen de alimento 2
-		this.grafico= new EnteGrafico(" reuta del alimento 2");
+		this.grafico= new EnteGrafico("assets/alimento/alimento2.png");
 	}
 	public void accept(Visitor v) {
 		v.visitAlimento2(this);

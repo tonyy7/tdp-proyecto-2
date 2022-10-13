@@ -13,7 +13,7 @@ public class SplashScreen extends JWindow {
 	public SplashScreen(int tiempo) {
 		this.tiempo = tiempo;
 		JPanel panel = (JPanel) getContentPane();
-		ImageIcon img 	= new ImageIcon("assets/SplashScreen.png");
+		ImageIcon img 	= new ImageIcon("assets/splashScreen/SplashScreen.png");
 		
 		panel.add(new JLabel(img), BorderLayout.CENTER);
 		setSize(img.getIconWidth(), img.getIconHeight());

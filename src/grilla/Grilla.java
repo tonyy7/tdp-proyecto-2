@@ -7,6 +7,7 @@ import criatura.Snake;
 import ente.Ente;
 import factory.FactoryLevel;
 import grilla.nivel.Nivel;
+import juego.Juego;
 
 public class Grilla {
 	protected LinkedList<Ente> grid[][];
@@ -15,8 +16,10 @@ public class Grilla {
 	protected Nivel nivelActual;
 	protected static int MAX_NIVEL = 5;
 	protected Snake snake;
+	protected Juego juego;
 	
-	public Grilla() {
+	public Grilla(Juego juego) {
+		this.juego = juego;
 		nivelActual = generadorNivel.generarNivel("niveles/nivel1.txt");
 		nivelN = 1;
 		grid = nivelActual.getGrilla();
@@ -32,14 +35,17 @@ public class Grilla {
 	
 	public void cargarNivel() {
 		nivelN++;
-		nivelActual = generadorNivel.generarNivel("niveles/nivel"+nivelN+".txt");
-		grid = nivelActual.getGrilla();
+		if(nivelN++ <= MAX_NIVEL) {
+			nivelActual = generadorNivel.generarNivel("niveles/nivel"+nivelN+".txt");
+			grid = nivelActual.getGrilla();
+		}
+		else
+			juego.gameOver();
 	}
 	
 	private void spawnConsumible() {
 		Ente e = nivelActual.getconsumible();
-		grid[e.getPosition().getX()][e.getPosition().getY()].addFirst(e);
-		
+		grid[e.getPosition().getX()][e.getPosition().getY()].addFirst(e);		
 	}
 	
 	public boolean estaVacia(Position pos) {

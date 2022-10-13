@@ -20,7 +20,7 @@ public class Juego {
 	
 	public Juego(Puntaje puntajes) {
 		this.puntajes = puntajes;
-		grilla = new Grilla();
+		grilla = new Grilla(this);
 		initSnake();
 		grilla.setSnake(snake);
 	}
@@ -43,8 +43,8 @@ public class Juego {
 		
 	}
 	
-	public void sumarPuntos() {
-		
+	public void sumarPuntos(int p) {
+		puntajeActual += p;
 	}
 	
 	public void gameOver() {
