@@ -112,7 +112,7 @@ public class Snake implements Visitor{
 	/*
 	 * @return Position correspondiente a la direccion
 	 */
-	private Position getDireccionP() {
+	public Position getDireccionP() {
 		Position toReturn = null;
 		switch (direccion) {
 		case "arriba" : {

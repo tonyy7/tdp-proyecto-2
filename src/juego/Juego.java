@@ -19,10 +19,13 @@ public class Juego {
 	protected Puntaje puntajes;
 	
 	public Juego(Puntaje puntajes) {
+		/*
 		this.puntajes = puntajes;
 		grilla = new Grilla(this);
 		initSnake();
 		grilla.setSnake(snake);
+		 */
+		ventana = new GUI(this);
 	}
 	
 	private void initSnake() {
@@ -40,7 +43,23 @@ public class Juego {
 	}
 	
 	public void moverCriatura(int x, int y) {
-		
+		Position posSnake = snake.getDireccionP();
+		//Si x no es cero, snake corre verticalmente
+		if(posSnake.getX() == 0) {
+			if( x == 1)
+				snake.setDireccion("derecha");
+			else
+				snake.setDireccion("izquierda");
+			snake.moverSnake();
+		}
+		else {
+			if(y == 1) {
+				snake.setDireccion("abajo");
+			}
+			else
+				snake.setDireccion("arriba");
+			snake.moverSnake();
+		}
 	}
 	
 	public void sumarPuntos(int p) {

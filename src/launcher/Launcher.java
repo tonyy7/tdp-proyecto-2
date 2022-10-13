@@ -15,9 +15,9 @@ public class Launcher {
 
 	public static void main(String[] args) {
 		
-		new SplashScreen(3);
+		//new SplashScreen(1);
 		
-		
+		new Juego(null);
 		
 		
 		

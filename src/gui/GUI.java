@@ -1,29 +1,31 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import juego.Juego;
 
-import javax.swing.JLabel;
-
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-import javax.swing.JButton;
 
 public class GUI extends JFrame {
 	protected Juego juego;
 	protected ControlTeclado teclado;
 	
 	public GUI(Juego juego) {
+		setResizable(false);
 		this.juego = juego;
 		teclado = new ControlTeclado(juego);
 		
 		getContentPane().setLayout(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(new Dimension(600, 800));
+		setResizable(false);
+		setLocationRelativeTo(null);
+		
 		
 		JPanel panelGrilla = new JPanel();
-		panelGrilla.setBounds(10, 11, 280, 239);
+		panelGrilla.setBounds(10, 11, 600, 600);
 		getContentPane().add(panelGrilla);
 		
 		JLabel lblPuntaje = new JLabel("puntaje");
@@ -38,7 +40,9 @@ public class GUI extends JFrame {
 		btnmenu.setBounds(300, 138, 124, 46);
 		getContentPane().add(btnmenu);
 		
+		
 		initKeyBindings();
+		setVisible(true);
 	}
 	
 	private void initKeyBindings() {
