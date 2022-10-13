@@ -79,7 +79,7 @@ public class Snake implements Visitor{
 	}
 	
 	/*
-	 * Crece el tamaño de snake n bloques en la direccion correspondiete.
+	 * Crece el tamaï¿½o de snake n bloques en la direccion correspondiete.
 	 */
 	public void crecerNBloques(int n) {
 		for(int i=0; i<n; i++) {
@@ -88,7 +88,7 @@ public class Snake implements Visitor{
 	}
 	
 	/*
-	 * Aumenta el tamaño de snake en 1 bloque en la direccion correspondiente.
+	 * Aumenta el tamaï¿½o de snake en 1 bloque en la direccion correspondiente.
 	 */
 	public void crecer() {
 		Position posDireccion = getDireccionP();
@@ -102,6 +102,7 @@ public class Snake implements Visitor{
 		else {
 			//codear colision con ente en la posicion proximna
 			colision = grilla.getEnte(proxima);
+			colision.accept(this);
 		}
 	}
 	

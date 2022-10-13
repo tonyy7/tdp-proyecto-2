@@ -2,6 +2,7 @@ package ente.alimento;
 
 import Position.Position;
 import ente.EnteGrafico;
+import visitor.Visitor;
 
 public class Alimento5 extends Alimento{
 	public Alimento5(Position p) {
@@ -10,5 +11,8 @@ public class Alimento5 extends Alimento{
 		this.posicion=p;
 		//Agregar ruta de la imagen de alimento 5
 		this.grafico= new EnteGrafico(" reuta del alimento 5");
+	}
+	public void accept(Visitor v) {
+		v.visitAlimento5(this);
 	}
 }

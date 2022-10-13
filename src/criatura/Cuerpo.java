@@ -11,4 +11,7 @@ public class Cuerpo extends Ente {
 		this.posicion=p;
 		this.grafico=new EnteGrafico("ruta");
 	}
+	public void accept(Visitor v) {
+		v.visitCuerpo(this);
+	}
 }
