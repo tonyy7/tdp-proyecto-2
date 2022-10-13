@@ -6,17 +6,20 @@ import Position.Position;
 import criatura.Snake;
 import ente.Ente;
 import factory.FactoryLevel;
+import grilla.nivel.Nivel;
 
 public class Grilla {
 	protected LinkedList<Ente> grid[][];
-	protected int nivel;
+	protected int nivelN;
 	protected FactoryLevel generadorNivel;
-	protected static int MAX_NIVEL;
+	protected Nivel nivelActual;
+	protected static int MAX_NIVEL = 5;
 	protected Snake snake;
 	
 	public Grilla() {
-		grid = generadorNivel.generarNivel("niveles/nivel1.txt");
-		nivel = 1;
+		nivelActual = generadorNivel.generarNivel("niveles/nivel1.txt");
+		nivelN = 1;
+		grid = nivelActual.getGrilla();
 	}
 		
 	public void setSnake(Snake snake) { 
@@ -28,8 +31,15 @@ public class Grilla {
 	}
 	
 	public void cargarNivel() {
-		nivel++;
-		grid = generadorNivel.generarNivel("niveles/nivel"+nivel+".txt");
+		nivelN++;
+		nivelActual = generadorNivel.generarNivel("niveles/nivel"+nivelN+".txt");
+		grid = nivelActual.getGrilla();
+	}
+	
+	private void spawnConsumible() {
+		Ente e = nivelActual.getconsumible();
+		grid[e.getPosition().getX()][e.getPosition().getY()].addFirst(e);
+		
 	}
 	
 	public boolean estaVacia(Position pos) {

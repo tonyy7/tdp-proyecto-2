@@ -3,7 +3,8 @@ package factory;
 import java.util.LinkedList;
 
 import ente.Ente;
+import grilla.nivel.Nivel;
 
 public interface FactoryLevel {
-	public LinkedList<Ente>[][] generarNivel(String url);
+	public Nivel generarNivel(String url);
 }

@@ -7,6 +7,6 @@ import ente.EnteGrafico;
 public class Pared extends Ente {
 	public Pared (Position p) {
 		this.posicion=p;
-		grafico= new EnteGrafico("ruta");
+		grafico = new EnteGrafico("ruta");
 	}
 }
