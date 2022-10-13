@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Position.Position;
+import ente.Ente;
 import ente.alimento.Alimento1;
 import ente.alimento.Alimento2;
 import ente.alimento.Alimento3;
@@ -92,8 +93,16 @@ public class Snake implements Visitor{
 	public void crecer() {
 		Position posDireccion = getDireccionP();
 		Position posCabeza = getPosicionCabeza();
-		cuerpo.getFirst().setPosition(new Position(posCabeza.getX()+posDireccion.getX(), posCabeza.getY()+posDireccion.getY()));
-		cuerpo.add(2, new Cuerpo(new Position(posCabeza.getX()-posDireccion.getX(), posCabeza.getY()-posDireccion.getY())));
+		Position proxima = new Position(posCabeza.getX()+posDireccion.getX(), posCabeza.getY()+posDireccion.getY());
+		Ente colision;
+		if(grilla.estaVacia(proxima)) {
+			cuerpo.getFirst().setPosition(proxima);
+			cuerpo.add(2, new Cuerpo(new Position(posCabeza.getX()-posDireccion.getX(), posCabeza.getY()-posDireccion.getY())));			
+		}
+		else {
+			//codear colision con ente en la posicion proximna
+			colision = grilla.getEnte(proxima);
+		}
 	}
 	
 	

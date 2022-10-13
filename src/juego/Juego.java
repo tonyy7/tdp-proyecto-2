@@ -49,6 +49,7 @@ public class Juego {
 	
 	public void gameOver() {
 		puntajes.setPuntaje(puntajeActual);
+		cerrar();
 	}
 	
 	public void setPuntaje(Puntaje p) {
@@ -57,6 +58,10 @@ public class Juego {
 	
 	public void aumentarNivel() {
 		
+	}
+	
+	public void cerrar() {
+		System.exit(0);
 	}
 	
 	

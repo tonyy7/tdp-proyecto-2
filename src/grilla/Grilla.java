@@ -31,4 +31,8 @@ public class Grilla {
 		nivel++;
 		grid = generadorNivel.generarNivel("niveles/nivel"+nivel+".txt");
 	}
+	
+	public boolean estaVacia(Position pos) {
+		return grid[pos.getX()][pos.getY()].isEmpty();
+	}
 }
