@@ -22,8 +22,8 @@ public class Grilla {
 	public Grilla(Juego juego) {
 		this.juego = juego;
 		generadorNivel = new GeneradorNivel();
-		nivelActual = generadorNivel.generarNivel("niveles/nivel1.txt");
 		nivelN = 1;
+		nivelActual = generadorNivel.generarNivel("assets/niveles/nivel"+nivelN+".txt");
 		grid = nivelActual.getGrilla();
 		spawnConsumible();
 	}
@@ -47,7 +47,7 @@ public class Grilla {
 	public void cargarNivel() {
 		nivelN++;
 		if(nivelN++ <= MAX_NIVEL) {
-			nivelActual = generadorNivel.generarNivel("niveles/nivel"+nivelN+".txt");
+			nivelActual = generadorNivel.generarNivel("assets/niveles/nivel"+nivelN+".txt");
 			grid = nivelActual.getGrilla();
 		}
 		else
