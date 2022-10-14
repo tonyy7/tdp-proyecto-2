@@ -12,22 +12,22 @@ public class ControlTeclado {
 		switch (dir) {
 		case "izquierda": 
 		{
-			juego.moverCriatura(0, -1);
+			juego.moverCriatura(-1, 0);
 			break;
 		}
 		case "derecha":
 		{
-			juego.moverCriatura(0, 1);
+			juego.moverCriatura(1, 0);
 			break;
 		}
 		case "arriba":
 		{
-			juego.moverCriatura(-1, 0);
+			juego.moverCriatura(0, -1);
 			break;
 		}
 		case "abajo":
 		{
-			juego.moverCriatura(1, 0);
+			juego.moverCriatura(0, 1);
 			break;
 		}
 		case "salir":

@@ -1,7 +1,10 @@
 package juego;
 
+import java.util.LinkedList;
+
 import Position.Position;
 import criatura.Snake;
+import ente.Ente;
 import grilla.Grilla;
 import gui.GUI;
 import puntaje.Puntaje;
@@ -21,18 +24,19 @@ public class Juego extends Thread{
 	protected Puntaje puntajes;
 	
 	public Juego(Puntaje puntajes) {
-		/*this.puntajes = puntajes;
+		//this.puntajes = puntajes;
 		grilla = new Grilla(this);
 		initSnake();
 		grilla.setSnake(snake);
-		*/
 		timer = new Reloj(this);
 		gameTimer = new GameTimer(snake);
 		ventana = new GUI(this, timer);
+		ventana.generarGrilla();
 		//Inicia reloj que controla el timepo en ventana
 		timer.start();
 		//Inicia reloj que controla el movimiento automatico de snake
 		gameTimer.start();
+		this.start();
 	}
 	
 	public void run() {
@@ -49,7 +53,7 @@ public class Juego extends Thread{
 	}
 	
 	public void actualizarCriatura() {
-		
+		ventana.actualizarVentana(snake.getCuerpo());
 	}
 	
 	public void moverCriatura(int x, int y) {
@@ -77,7 +81,8 @@ public class Juego extends Thread{
 	}
 	
 	public void gameOver() {
-		puntajes.setPuntaje(puntajeActual);
+		//puntajes.setPuntaje(puntajeActual);
+		 System.out.println("muerto");
 		cerrar();
 	}
 	
@@ -91,6 +96,10 @@ public class Juego extends Thread{
 	
 	public void cerrar() {
 		System.exit(0);
+	}
+	
+	public LinkedList<Ente>[][] getGrilla(){
+		return grilla.getGrilla();
 	}
 	
 }

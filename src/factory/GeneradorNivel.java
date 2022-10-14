@@ -41,16 +41,18 @@ public class GeneradorNivel implements FactoryLevel {
 		
 		//Generan las paredes en los bordes de la grilla
 		for(int i = 0; i < 20; i++) {
-			miNivel[0][i].addFirst(new Pared(new Position(0,i)));
+			miNivel[0][i].addFirst(new Pared(new Position(i,0)));
 		}
-		for(int i = 1; i < 20; i++) {
+		for (int i = 0; i < 20; i++) {
+			miNivel[19][i].addFirst(new Pared(new Position(i,19)));
+		}
+		
+		for(int i = 1; i < 19; i++) {
+			miNivel[i][19].addFirst(new Pared(new Position(19,i)));
+		}
+		
+		for(int i = 1; i < 19; i++) {
 			miNivel[i][0].addFirst(new Pared(new Position(0,i)));
-		}
-		for(int i = 1; i < 20; i++) {
-			miNivel[i][i].addFirst(new Pared(new Position(i,20)));
-		}
-		for (int i = 1; i < 19; i++) {
-			miNivel[20][i].addFirst(new Pared(new Position(20,i)));
 		}
 		
 		consumibles = new LinkedList<Ente>();
@@ -77,6 +79,14 @@ public class GeneradorNivel implements FactoryLevel {
 			for(int i = 0; i < level.length(); i++) {
 				
 				switch(level.charAt(i)){
+				
+				case 'P':{
+					x = String.valueOf(level.charAt(i+2)) + String.valueOf(level.charAt(i+3));
+					y = String.valueOf(level.charAt(i+5)) + String.valueOf(level.charAt(i+6));
+					Pared p = new Pared(new Position(Integer.parseInt(x),Integer.parseInt(y)));
+					miNivel[p.getPosition().getX()][p.getPosition().getY()].addFirst(p);
+					i=i+6;
+				}break;
 				
 				case 'p':{
 					x = String.valueOf(level.charAt(i+2)) + String.valueOf(level.charAt(i+3));

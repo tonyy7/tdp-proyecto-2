@@ -52,7 +52,7 @@ public class Snake implements Visitor{
 		cuerpo.getFirst().setSkin(urlCabeza);
 		grilla.setEnte(cuerpo.getFirst().getPosition(), cuerpo.getFirst());
 		for(int i=1; i<TAMANIO; i++) {
-			posSiguiente = cuerpo.get(i).getPosition();
+			posSiguiente = cuerpo.get(i-1).getPosition();
 			insert = new Cuerpo(new Position(posSiguiente.getX()-posDireccion.getX(), posSiguiente.getY()-posDireccion.getY()));
 			cuerpo.addLast(insert);
 			cuerpo.get(i).setSkin(urlCuerpo);
@@ -84,6 +84,7 @@ public class Snake implements Visitor{
 	public void moverSnake() {
 		crecer();
 		cuerpo.removeLast();
+
 	}
 	
 	/*
@@ -103,7 +104,7 @@ public class Snake implements Visitor{
 		Position posCabeza = getPosicionCabeza();
 		Position proxima = new Position(posCabeza.getX()+posDireccion.getX(), posCabeza.getY()+posDireccion.getY());
 		Ente colision;
-		if(grilla.estaVacia(proxima)) {
+		if(grilla.getEnte(proxima) == null) {
 			cuerpo.getFirst().setSkin(urlCuerpo);
 			cuerpo.addFirst(new Cuerpo(proxima));
 			cuerpo.getFirst().setSkin(urlCabeza);
@@ -115,6 +116,10 @@ public class Snake implements Visitor{
 			colision.accept(this);
 		}
 	}
+	
+	public LinkedList<Cuerpo> getCuerpo() {
+        return cuerpo;
+    }
 	
 	/*
 	 * Cambia la skin correspondiente a snake
@@ -135,19 +140,19 @@ public class Snake implements Visitor{
 		Position toReturn = null;
 		switch (direccion) {
 		case "arriba" : {
-			toReturn = new Position(-1,0);
-			break;
-		}
-		case "abajo" : {
-			toReturn = new Position(1,0);
-			break;
-		}
-		case "izquierda" : {
 			toReturn = new Position(0,-1);
 			break;
 		}
-		case "derecha" : {
+		case "abajo" : {
 			toReturn = new Position(0,1);
+			break;
+		}
+		case "izquierda" : {
+			toReturn = new Position(-1,0);
+			break;
+		}
+		case "derecha" : {
+			toReturn = new Position(1,0);
 			break;
 		}
 		}

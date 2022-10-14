@@ -25,7 +25,7 @@ public class Grilla {
 		nivelN = 1;
 		nivelActual = generadorNivel.generarNivel("assets/niveles/nivel"+nivelN+".txt");
 		grid = nivelActual.getGrilla();
-		spawnConsumible();
+		//spawnConsumible();
 	}
 	
 	public void setSnake(Snake snake) { 
