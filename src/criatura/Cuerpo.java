@@ -9,7 +9,7 @@ public class Cuerpo extends Ente {
 	
 	public Cuerpo(Position p) {
 		this.posicion=p;
-		this.grafico=new EnteGrafico("ruta");
+		this.grafico=new EnteGrafico("");
 	}
 	
 	public void setSkin(String url) {

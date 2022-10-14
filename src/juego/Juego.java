@@ -8,6 +8,7 @@ import criatura.Snake;
 import grilla.Grilla;
 import gui.GUI;
 import puntaje.Puntaje;
+import reloj.GameTimer;
 import reloj.Reloj;
 
 public class Juego {
@@ -17,6 +18,7 @@ public class Juego {
 	protected Snake snake;
 	protected Grilla grilla;
 	protected Reloj timer;
+	protected GameTimer gameTimer;
 	
 	protected Puntaje puntajes;
 	
@@ -26,8 +28,12 @@ public class Juego {
 		//initSnake();
 		//grilla.setSnake(snake);
 		timer = new Reloj(this);
+		gameTimer = new GameTimer(snake);
 		ventana = new GUI(this, timer);
+		//Inicia reloj que controla el timepo en ventana
 		timer.start();
+		//Inicia reloj que controla el movimiento automatico de snake
+		gameTimer.start();
 	}
 	
 	private void initSnake() {
