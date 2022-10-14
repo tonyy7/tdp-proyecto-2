@@ -39,7 +39,7 @@ public class Puntaje implements Serializable {
 		int estado = 0;
 		Collections.sort(puntajeHistorico, Collections.reverseOrder());
 		for(int a : puntajeHistorico) {
-			if(estado < 10) {
+			if(estado < 5) {
 				aux.add(a);
 				estado++;
 			}

@@ -17,19 +17,9 @@ public class Launcher {
 
 	public static void main(String[] args) {		
 		new SplashScreen(1);
-		new Juego(null);
 		
 
 		//juego.start();
-		
-		/* PARA LEER PUNTAJE
-		try {
-			puntajeHistorico = leerPuntaje();
-			juego = new Juego(puntajeHistorico);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		*/
 		
 	}
 	

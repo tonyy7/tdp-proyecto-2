@@ -24,11 +24,49 @@ public class GeneradorNivel implements FactoryLevel {
 	LinkedList<Ente>[][] miNivel;
 	LinkedList<Ente> consumibles;
 
+	/*
+	 * Inicializa una lista de consumibles y una grilla con sus extremos
+	 * como pared. 
+	 */
+	public GeneradorNivel() {
+		miNivel = (LinkedList<Ente>[][]) new LinkedList[20][20];
+		consumibles = new LinkedList<Ente>();
+		
+		for(int i = 0; i < 20; i++) { //Inicia la grilla
+			for (int j = 0; j < 20; j++) {
+				miNivel[i][j] = new LinkedList<Ente>();
+				miNivel[i][j].addFirst(null);
+			}
+		}
+		
+		//Generan las paredes en los bordes de la grilla
+		for(int i = 0; i < 20; i++) {
+			miNivel[0][i].addFirst(new Pared(new Position(0,i)));
+		}
+		for(int i = 1; i < 20; i++) {
+			miNivel[i][0].addFirst(new Pared(new Position(0,i)));
+		}
+		for(int i = 1; i < 20; i++) {
+			miNivel[i][i].addFirst(new Pared(new Position(i,20)));
+		}
+		for (int i = 1; i < 19; i++) {
+			miNivel[20][i].addFirst(new Pared(new Position(20,i)));
+		}
+		
+		consumibles = new LinkedList<Ente>();
+	}
+	
+	/*
+	 * Generador de Nivel, recibe un string correspondiente a un archivo txt
+	 * 1,2,3,4,5 corresponden a Alimento1, Alimento3, etc
+	 * 6,7,8 corresponden a PowerUp1, PowerUp2, etc.
+	 * p corresponde a Pared
+	 * @return Nivel
+	 */
 	public Nivel generarNivel(String url) {
 		Path filePath
 		= Paths.get(url);
 		String level;
-		iniciar();
 		try {
 			level = Files.readString(filePath);
 			level = level.replace(" ","");
@@ -40,7 +78,7 @@ public class GeneradorNivel implements FactoryLevel {
 				
 				switch(level.charAt(i)){
 				
-				case 'P':{
+				case 'p':{
 					x = String.valueOf(level.charAt(i+2)) + String.valueOf(level.charAt(i+3));
 					y = String.valueOf(level.charAt(i+5)) + String.valueOf(level.charAt(i+6));
 					Pared p = new Pared(new Position(Integer.parseInt(x),Integer.parseInt(y)));
@@ -121,34 +159,5 @@ public class GeneradorNivel implements FactoryLevel {
 		return new Nivel(miNivel, consumibles);
 	}
 	
-	
-	@SuppressWarnings("unchecked")
-	private void iniciar() {
-		miNivel = (LinkedList<Ente>[][]) new LinkedList[20][20];
-		consumibles = new LinkedList<Ente>();
-		
-		for(int i = 0; i < 20; i++) { //Inicia la grilla
-			for (int j = 0; j < 20; j++) {
-				miNivel[i][j] = new LinkedList<Ente>();
-				miNivel[i][j].addFirst(null);
-			}
-		}
-		
-		//Generan las paredes en los bordes de la grilla
-		for(int i = 0; i < 20; i++) {
-			miNivel[0][i].addFirst(new Pared(new Position(0,i)));
-		}
-		for(int i = 1; i < 20; i++) {
-			miNivel[i][0].addFirst(new Pared(new Position(0,i)));
-		}
-		for(int i = 1; i < 20; i++) {
-			miNivel[i][i].addFirst(new Pared(new Position(i,20)));
-		}
-		for (int i = 1; i < 19; i++) {
-			miNivel[20][i].addFirst(new Pared(new Position(20,i)));
-		}
-		
-		consumibles = new LinkedList<Ente>();
-	}
 
 }
