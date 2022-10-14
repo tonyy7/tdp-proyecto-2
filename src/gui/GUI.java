@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.*;
 
+import grilla.Grilla;
 import juego.Juego;
 import reloj.Reloj;
 
@@ -16,6 +17,7 @@ import java.awt.Font;
 import java.awt.event.KeyAdapter;
 
 public class GUI extends JFrame {
+	protected final static int celdaSize = 30; //Tamaño de las celdas 30x30
 	protected Juego juego;
 	protected ControlTeclado teclado;
 	protected JLabel lblPuntaje;
@@ -24,6 +26,7 @@ public class GUI extends JFrame {
 	private Color colorTexto;
 	private Font fuenteTexto;
 	private JTextPane textPane;
+	
 	
 	public GUI(Juego juego, Reloj timer) {
 		this.juego = juego;
@@ -77,6 +80,10 @@ public class GUI extends JFrame {
 		getContentPane().add(lblPuntaje);
 		getContentPane().add(btnmenu);
 		getContentPane().add(textPane);
+	}
+	
+	public void actualizarGrilla() {
+		
 	}
 	
 	public void setTiempo() {

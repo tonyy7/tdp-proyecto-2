@@ -6,13 +6,14 @@ import Position.Position;
 import criatura.Snake;
 import ente.Ente;
 import factory.FactoryLevel;
+import factory.GeneradorNivel;
 import grilla.nivel.Nivel;
 import juego.Juego;
 
 public class Grilla {
 	protected LinkedList<Ente> grid[][];
 	protected int nivelN;
-	protected FactoryLevel generadorNivel;
+	protected GeneradorNivel generadorNivel;
 	protected Nivel nivelActual;
 	protected static int MAX_NIVEL = 5;
 	protected Snake snake;
@@ -20,13 +21,19 @@ public class Grilla {
 	
 	public Grilla(Juego juego) {
 		this.juego = juego;
-		nivelActual = generadorNivel.generarNivel("niveles/nivel1.txt");
+		generadorNivel = new GeneradorNivel();
+		nivelActual = generadorNivel.generarNivel("nivel1.txt");
 		nivelN = 1;
 		grid = nivelActual.getGrilla();
+		spawnConsumible();
 	}
-		
+	
 	public void setSnake(Snake snake) { 
 		this.snake = snake;
+	}
+	
+	public LinkedList<Ente>[][] getGrilla(){
+		return grid;
 	}
 	
 	public Ente getEnte(Position p) {
@@ -43,7 +50,12 @@ public class Grilla {
 			juego.gameOver();
 	}
 	
-	public void spawnConsumible() {
+	public void consumir(Ente a) {
+		grid[a.getPosition().getX()][a.getPosition().getY()].removeFirst();
+		spawnConsumible();
+	}
+	
+	private void spawnConsumible() {
 		Ente e = nivelActual.getconsumible();
 		if(e == null) {
 			juego.aumentarNivel();
