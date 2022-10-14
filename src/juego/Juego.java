@@ -11,10 +11,10 @@ import puntaje.Puntaje;
 import reloj.GameTimer;
 import reloj.Reloj;
 import splashScreen.SplashScreen;
+import splashScreen.SplashScreenGameOver;
 
 public class Juego extends Thread{
 	protected GUI ventana;
-	protected int maxPuntaje; //seteado por nivel
 	protected int puntajeActual; //puntaje actual del juego
 	protected Snake snake;
 	protected Grilla grilla;
@@ -24,7 +24,8 @@ public class Juego extends Thread{
 	protected Puntaje puntajes;
 	
 	public Juego(Puntaje puntajes) {
-		//this.puntajes = puntajes;
+		puntajeActual = 0;
+		this.puntajes = puntajes;
 		grilla = new Grilla(this);
 		timerVentana = new Reloj(this);
 		
@@ -47,7 +48,7 @@ public class Juego extends Thread{
 		while (true) {
 			actualizarCriatura();
 			getConsumible();
-			getElementoConsumido();
+			getElementoConsumido();			
 		}
 	}
 	
@@ -85,9 +86,8 @@ public class Juego extends Thread{
 	}
 	
 	public void gameOver() {
-		//puntajes.setPuntaje(puntajeActual);
+		puntajes.setPuntaje(puntajeActual);
 		timerVentana.stop();
-		System.out.println("muerto");
 		cerrar();
 	}
 	
@@ -100,7 +100,7 @@ public class Juego extends Thread{
 	}
 	
 	public void cerrar() {
-		//new SplashScreen(3,"assets/gameover.jpg");
+		new SplashScreen(4,"assets/gameover/gameover.png");
 		System.exit(0);
 	}
 	

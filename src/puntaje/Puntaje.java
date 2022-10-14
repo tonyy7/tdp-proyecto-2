@@ -48,5 +48,13 @@ public class Puntaje implements Serializable {
 		}
 		puntajeHistorico = aux;
 	}
+	
+	public String getTopString() {
+		String toReturn = "";
+		for(int a: puntajeHistorico) {
+			toReturn += a+"\n";
+		}
+		return toReturn;
+	}
 
 }

@@ -34,10 +34,11 @@ public class GUI extends JFrame {
 	protected JPanel panelGrilla;
 	private Color colorTexto;
 	private Font fuenteTexto;
-	private JTextPane textPane;
+	private JTextPane textPaneTiempo;
 	
 	protected int frameX;
 	protected int frameY;
+	private JTextPane textPanePuntos;
 	
 	
 	
@@ -65,28 +66,21 @@ public class GUI extends JFrame {
 		panelGrilla.setBackground(new Color(233, 246, 255));
 		panelGrilla.setBounds(10, 10, 600, 600);
 		
-		JLabel lblPuntaje = new JLabel("PUNTAJE:");
-		lblPuntaje.setFont(fuenteTexto);
-		lblPuntaje.setForeground(new Color(255, 255, 0));
-		lblPuntaje.setBounds(638, 88, 130, 40);
-		lblPuntaje.setBackground(colorTexto);
+		textPanePuntos = new JTextPane();
+		textPanePuntos.setText("PUNTAJE: 0");
+		textPanePuntos.setForeground(Color.YELLOW);
+		textPanePuntos.setFont(new Font("Arial", Font.BOLD, 14));
+		textPanePuntos.setEditable(false);
+		textPanePuntos.setBackground(new Color(6, 40, 61));
+		textPanePuntos.setBounds(638, 98, 130, 40);
 		
-		JButton btnmenu = new JButton("menu");
-		btnmenu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnmenu.setBackground(new Color(71, 181, 255));
-		btnmenu.setForeground(new Color(0, 0, 0));
-		btnmenu.setBounds(639, 320, 130, 46);
-		
-		textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setBackground(new Color(6, 40, 61));
-		textPane.setForeground(new Color(255, 255, 0));
-		textPane.setText("TIEMPO: 00:00");
-		textPane.setFont(new Font("Arial", Font.BOLD, 14));
-		textPane.setBounds(638, 47, 130, 40);
+		textPaneTiempo = new JTextPane();
+		textPaneTiempo.setEditable(false);
+		textPaneTiempo.setBackground(new Color(6, 40, 61));
+		textPaneTiempo.setForeground(new Color(255, 255, 0));
+		textPaneTiempo.setText("TIEMPO: 00:00");
+		textPaneTiempo.setFont(new Font("Arial", Font.BOLD, 14));
+		textPaneTiempo.setBounds(638, 47, 130, 40);
 		
 		
 		setVisible(true);
@@ -94,9 +88,9 @@ public class GUI extends JFrame {
 		
 		getContentPane().add(panelGrilla);
 		panelGrilla.setLayout(null);
-		getContentPane().add(lblPuntaje);
-		getContentPane().add(btnmenu);
-		getContentPane().add(textPane);
+		getContentPane().add(textPaneTiempo);
+		
+		getContentPane().add(textPanePuntos);
 
 	}
 	
@@ -149,11 +143,11 @@ public class GUI extends JFrame {
 	}
 	
 	public void setTiempo() {
-		textPane.setText("TIEMPO: "+timer.getTime());
+		textPaneTiempo.setText("TIEMPO: "+timer.getTime());
 	}
 	
-	public void setPuntaje() {
-		lblPuntaje.setText("PUNTAJE: "+juego.getPuntajeActaul());
+	public void setPuntaje(int puntaje) {
+		lblPuntaje.setText("PUNTAJE: "+puntaje);
 	}
 	
 	private void initKeyBindings() {

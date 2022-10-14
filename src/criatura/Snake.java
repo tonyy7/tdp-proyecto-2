@@ -111,8 +111,6 @@ public class Snake implements Visitor{
 			grilla.removerEnte(cuerpo.getLast().getPosition());
 		}
 		else {
-			//codear colision con ente en la posicion proximna
-			System.out.println("hay consumible");
 			colision = grilla.getEnte(proxima);
 			colision.accept(this);
 		}

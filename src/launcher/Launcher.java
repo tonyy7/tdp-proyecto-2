@@ -16,11 +16,15 @@ public class Launcher {
 	private static String file = "puntaje/puntaje.p";
 
 	public static void main(String[] args) {		
-		//new SplashScreen(3,"assets/splashScreen/SplashScreen.png");
-		//System.setProperty("sun.java2d.opengl", "true");
-		new Juego(null);
-		//juego.start();
+		new SplashScreen(3,"assets/splashScreen/SplashScreen.png");
 		
+		Puntaje puntajeHistorico;
+		try {
+			puntajeHistorico = leerPuntaje();
+			new Juego(puntajeHistorico);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public static void guardarPuntaje(Puntaje p) throws Exception {
