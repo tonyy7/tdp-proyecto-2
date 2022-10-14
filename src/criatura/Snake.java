@@ -161,21 +161,21 @@ public class Snake implements Visitor{
 	}
 
 	public void visitAlimento1(Alimento1 a) {
+		grilla.consumir(a);
 		crecerNBloques(a.getBloque());
 		juego.sumarPuntos(a.getPuntaje());
-		grilla.consumir(a);
 	}
 
 	public void visitAlimento2(Alimento2 a) {
+		grilla.consumir(a);
 		crecerNBloques(a.getBloque());
 		juego.sumarPuntos(a.getPuntaje());
-		grilla.consumir(a);
 	}
 
 	public void visitAlimento3(Alimento3 a) {
+		grilla.consumir(a);
 		crecerNBloques(a.getBloque());
 		juego.sumarPuntos(a.getPuntaje());
-		grilla.consumir(a);
 	}
 
 	public void visitAlimento4(Alimento4 a) {
@@ -185,33 +185,33 @@ public class Snake implements Visitor{
 	}
 
 	public void visitAlimento5(Alimento5 a) {
+		grilla.consumir(a);
 		crecerNBloques(a.getBloque());
 		juego.sumarPuntos(a.getPuntaje());
-		grilla.consumir(a);
 	}
 
 	/*
 	 * VER EL ORDEN DE CAMBIO DE SKIN
 	 */
 	public void visitPowerUp1(PowerUp1 p) {
+		grilla.consumir(p);
 		cambiarSkin(p.getUrlCabeza(), p.getUrlCuerpo());
 		crecerNBloques(3);
 		juego.sumarPuntos(p.getPuntaje());
-		grilla.consumir(p);
 	}
 
 	public void visitPowerUp2(PowerUp2 p) {
+		grilla.consumir(p);
 		cambiarSkin(p.getUrlCabeza(), p.getUrlCuerpo());
 		crecerNBloques(3);
 		juego.sumarPuntos(p.getPuntaje());
-		grilla.consumir(p);
 	}
 
 	public void visitPowerUp3(PowerUp3 p) {
+		grilla.consumir(p);
 		cambiarSkin(p.getUrlCabeza(), p.getUrlCuerpo());
 		crecerNBloques(3);
 		juego.sumarPuntos(p.getPuntaje());
-		grilla.consumir(p);
 	}
 
 	public void visitCuerpo(Cuerpo c) {

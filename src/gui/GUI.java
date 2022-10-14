@@ -30,6 +30,7 @@ public class GUI extends JFrame {
 	protected Reloj timer;
 	protected LinkedList<JLabel> pared;
 	protected LinkedList<JLabel> snake;
+	protected LinkedList<JLabel> consumibles;
 	protected JPanel panelGrilla;
 	private Color colorTexto;
 	private Font fuenteTexto;
@@ -45,6 +46,7 @@ public class GUI extends JFrame {
 		frameY=1;
 		pared = new LinkedList<JLabel>();
 		snake = new LinkedList<JLabel>();
+		consumibles = new LinkedList<JLabel>();
 		this.juego = juego;
 		this.timer = timer;
 		teclado = new ControlTeclado(juego);
@@ -139,6 +141,11 @@ public class GUI extends JFrame {
 		ente = new JLabel(new ImageIcon(e.getSkin()));
 		panelGrilla.add(ente);
 		ente.setBounds(e.getPosition().getX()*30, e.getPosition().getY()*30, 30, 30);
+		consumibles.addLast(ente);
+	}
+	
+	public void removerEnte(Ente e) {
+		consumibles.getFirst().setIcon(null);	
 	}
 	
 	public void setTiempo() {

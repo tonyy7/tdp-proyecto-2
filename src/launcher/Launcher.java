@@ -17,7 +17,7 @@ public class Launcher {
 
 	public static void main(String[] args) {		
 		//new SplashScreen(3,"assets/splashScreen/SplashScreen.png");
-		
+		//System.setProperty("sun.java2d.opengl", "true");
 		new Juego(null);
 		//juego.start();
 		

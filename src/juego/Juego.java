@@ -27,14 +27,18 @@ public class Juego extends Thread{
 		//this.puntajes = puntajes;
 		grilla = new Grilla(this);
 		timerVentana = new Reloj(this);
+		
+		
 		ventana = new GUI(this, timerVentana);
 		ventana.generarGrilla();
+		
+		
 		initSnake();
 		grilla.setSnake(snake);
-		//Inicia reloj que controla el timepo en ventana
+		
+		
 		gameTimer = new GameTimer(snake);
 		timerVentana.start();
-		//Inicia reloj que controla el movimiento automatico de snake
 		gameTimer.start();
 		this.start();
 	}
@@ -43,6 +47,7 @@ public class Juego extends Thread{
 		while (true) {
 			actualizarCriatura();
 			getConsumible();
+			getElementoConsumido();
 		}
 	}
 	
@@ -65,7 +70,6 @@ public class Juego extends Thread{
 				snake.setDireccion("derecha");
 			else
 				snake.setDireccion("izquierda");
-			snake.moverSnake();
 		}
 		else {
 			if(y == 1) {
@@ -73,7 +77,6 @@ public class Juego extends Thread{
 			}
 			else
 				snake.setDireccion("arriba");
-			snake.moverSnake();
 		}
 	}
 	
@@ -97,7 +100,7 @@ public class Juego extends Thread{
 	}
 	
 	public void cerrar() {
-		new SplashScreen(3,"assets/gameover.jpg");
+		//new SplashScreen(3,"assets/gameover.jpg");
 		System.exit(0);
 	}
 	
@@ -108,5 +111,10 @@ public class Juego extends Thread{
 	public void getConsumible() {
 		if(grilla.getConsumible() != null)
 			ventana.setEnte(grilla.getConsumible());
+	}
+	
+	public void getElementoConsumido() {
+		if(grilla.getElementoConsumido() != null)
+			ventana.removerEnte(grilla.getElementoConsumido());
 	}
 }

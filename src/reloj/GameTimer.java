@@ -4,19 +4,19 @@ import criatura.Snake;
 
 public class GameTimer extends Thread {
 	protected Snake snake;
-	private static int FRAME = 95;
+	private static int FRAME = 150;
 	
 	public GameTimer(Snake snake) {
 		this.snake = snake;
 	}
 	public void run() {
-		while(true) {
-			try {
+		try {			
+			while(true) {
 				Thread.sleep(FRAME);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			snake.moverSnake();
-		}
+				snake.moverSnake();
+			}			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}	
 	}
 }

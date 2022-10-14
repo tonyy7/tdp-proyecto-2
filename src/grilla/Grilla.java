@@ -19,6 +19,8 @@ public class Grilla {
 	protected Snake snake;
 	protected Juego juego;
 	protected Ente elemento;
+	protected Ente elementoConsumido;
+	
 	
 	public Grilla(Juego juego) {
 		this.juego = juego;
@@ -34,7 +36,8 @@ public class Grilla {
 	}
 	
 	public void removerEnte(Position p) {
-		grid[p.getX()][p.getY()].removeFirst();
+		if(!grid[p.getX()][p.getY()].isEmpty())
+            grid[p.getX()][p.getY()].removeFirst();
 	}
 	
 	public void setEnte(Position pos, Ente e) {
@@ -46,7 +49,10 @@ public class Grilla {
 	}
 	
 	public Ente getEnte(Position p) {
-		return grid[p.getX()][p.getY()].getFirst();
+		if(grid[p.getX()][p.getY()].isEmpty())
+            return null;
+        else
+            return grid[p.getX()][p.getY()].getFirst();
 	}
 	
 	public void cargarNivel() {
@@ -60,6 +66,7 @@ public class Grilla {
 	}
 	
 	public void consumir(Ente a) {
+		elementoConsumido = a;
 		grid[a.getPosition().getX()][a.getPosition().getY()].removeFirst();
 		spawnConsumible();
 	}
@@ -84,5 +91,9 @@ public class Grilla {
 	
 	public Ente getConsumible() {
 		return elemento;
+	}
+	
+	public Ente getElementoConsumido() {
+		return elementoConsumido;
 	}
 }
