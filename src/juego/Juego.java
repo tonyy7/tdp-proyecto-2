@@ -8,6 +8,7 @@ import criatura.Snake;
 import grilla.Grilla;
 import gui.GUI;
 import puntaje.Puntaje;
+import reloj.Reloj;
 
 public class Juego {
 	protected GUI ventana;
@@ -15,17 +16,18 @@ public class Juego {
 	protected int puntajeActual; //puntaje actual del juego
 	protected Snake snake;
 	protected Grilla grilla;
+	protected Reloj timer;
 	
 	protected Puntaje puntajes;
 	
 	public Juego(Puntaje puntajes) {
-		/*
-		this.puntajes = puntajes;
-		grilla = new Grilla(this);
-		initSnake();
-		grilla.setSnake(snake);
-		 */
-		ventana = new GUI(this);
+		//this.puntajes = puntajes;
+		//grilla = new Grilla(this);
+		//initSnake();
+		//grilla.setSnake(snake);
+		timer = new Reloj(this);
+		ventana = new GUI(this, timer);
+		timer.start();
 	}
 	
 	private void initSnake() {
@@ -77,6 +79,14 @@ public class Juego {
 	
 	public void aumentarNivel() {
 		
+	}
+	
+	public int getPuntajeActaul() {
+		return puntajeActual;
+	}
+	
+	public void actualizarTiempo() {
+		ventana.setTiempo();
 	}
 	
 	public void cerrar() {

@@ -5,8 +5,10 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import gui.GUI;
 import juego.Juego;
 import puntaje.Puntaje;
+import reloj.Reloj;
 import splashScreen.SplashScreen;
 
 public class Launcher {
