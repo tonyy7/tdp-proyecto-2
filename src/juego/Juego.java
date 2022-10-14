@@ -1,5 +1,7 @@
 package juego;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import grilla.Grilla;
 import gui.GUI;
 import puntaje.Puntaje;
 
-public class Juego {
+public class Juego extends Thread{
 	protected GUI ventana;
 	protected int maxPuntaje; //seteado por nivel
 	protected int puntajeActual; //puntaje actual del juego
@@ -19,11 +21,25 @@ public class Juego {
 	protected Puntaje puntajes;
 	
 	public Juego(Puntaje puntajes) {
-		this.puntajes = puntajes;
+		/*this.puntajes = puntajes;
 		grilla = new Grilla(this);
 		initSnake();
 		grilla.setSnake(snake);
+		*/
+		ventana= new GUI(this);
+		
+		this.start();
 	}
+	
+	public void run() {
+		while (true) {
+			actualizarCriatura();
+		}
+	}
+	
+	
+	
+	
 	
 	private void initSnake() {
 		String dir[] = {"arriba", "abajo", "izquierda", "derecha"};
@@ -63,6 +79,7 @@ public class Juego {
 	public void cerrar() {
 		System.exit(0);
 	}
+	
 	
 	
 }

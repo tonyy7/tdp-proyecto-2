@@ -15,20 +15,21 @@ public class Launcher {
 
 	public static void main(String[] args) {
 		
-		new SplashScreen(3);
+		//new SplashScreen(3);
 		
 		
 		
 		
 		
-		/* PARA GENERAR PUNTAJE
+		
+		Puntaje puntajeHistorico=new Puntaje();
 		try {
 			Launcher.guardarPuntaje(puntajeHistorico);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		*/
-		
+		Juego juego=new Juego(puntajeHistorico);
+		//juego.start();
 		
 		/* PARA LEER PUNTAJE
 		try {

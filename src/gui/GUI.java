@@ -17,6 +17,11 @@ public class GUI extends JFrame {
 	protected ControlTeclado teclado;
 	
 	public GUI(Juego juego) {
+		this.setSize(800,600);
+		setVisible(true);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		this.juego = juego;
 		teclado = new ControlTeclado(juego);
 		
@@ -31,12 +36,16 @@ public class GUI extends JFrame {
 		getContentPane().add(lblPuntaje);
 		
 		JLabel lblNewLabel = new JLabel("tiempo");
-		lblNewLabel.setBounds(300, 72, 124, 55);
+		lblNewLabel.setBounds(300, 72, 56, 55);
 		getContentPane().add(lblNewLabel);
 		
 		JButton btnmenu = new JButton("menu");
 		btnmenu.setBounds(300, 138, 124, 46);
 		getContentPane().add(btnmenu);
+		
+		JLabel lblHora = new JLabel("");
+		lblHora.setBounds(366, 77, 92, 50);
+		getContentPane().add(lblHora);
 		
 		initKeyBindings();
 	}
@@ -61,6 +70,7 @@ public class GUI extends JFrame {
 					}
 					case KeyEvent.VK_UP:
 					{
+						System.out.println("HOliss");
 						teclado.generadorPosition("arriba");
 						break;
 					}
