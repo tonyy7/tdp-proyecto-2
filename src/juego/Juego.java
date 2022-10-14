@@ -10,6 +10,7 @@ import criatura.Snake;
 import grilla.Grilla;
 import gui.GUI;
 import puntaje.Puntaje;
+import reloj.Reloj;
 
 public class Juego extends Thread{
 	protected GUI ventana;
@@ -17,10 +18,12 @@ public class Juego extends Thread{
 	protected int puntajeActual; //puntaje actual del juego
 	protected Snake snake;
 	protected Grilla grilla;
+	protected Reloj timer;
 	
 	protected Puntaje puntajes;
 	
 	public Juego(Puntaje puntajes) {
+<<<<<<< HEAD
 		/*this.puntajes = puntajes;
 		grilla = new Grilla(this);
 		initSnake();
@@ -29,6 +32,15 @@ public class Juego extends Thread{
 		ventana= new GUI(this);
 		
 		this.start();
+=======
+		//this.puntajes = puntajes;
+		//grilla = new Grilla(this);
+		//initSnake();
+		//grilla.setSnake(snake);
+		timer = new Reloj(this);
+		ventana = new GUI(this, timer);
+		timer.start();
+>>>>>>> branch 'master' of https://github.com/tonyy7/tdp-proyecto-2
 	}
 	
 	public void run() {
@@ -56,7 +68,23 @@ public class Juego extends Thread{
 	}
 	
 	public void moverCriatura(int x, int y) {
-		
+		Position posSnake = snake.getDireccionP();
+		//Si x no es cero, snake corre verticalmente
+		if(posSnake.getX() == 0) {
+			if( x == 1)
+				snake.setDireccion("derecha");
+			else
+				snake.setDireccion("izquierda");
+			snake.moverSnake();
+		}
+		else {
+			if(y == 1) {
+				snake.setDireccion("abajo");
+			}
+			else
+				snake.setDireccion("arriba");
+			snake.moverSnake();
+		}
 	}
 	
 	public void sumarPuntos(int p) {
@@ -74,6 +102,14 @@ public class Juego extends Thread{
 	
 	public void aumentarNivel() {
 		
+	}
+	
+	public int getPuntajeActaul() {
+		return puntajeActual;
+	}
+	
+	public void actualizarTiempo() {
+		ventana.setTiempo();
 	}
 	
 	public void cerrar() {

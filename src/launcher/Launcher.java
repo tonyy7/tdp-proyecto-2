@@ -5,8 +5,10 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import gui.GUI;
 import juego.Juego;
 import puntaje.Puntaje;
+import reloj.Reloj;
 import splashScreen.SplashScreen;
 
 public class Launcher {
@@ -15,9 +17,13 @@ public class Launcher {
 
 	public static void main(String[] args) {
 		
+<<<<<<< HEAD
 		//new SplashScreen(3);
+=======
+		//new SplashScreen(1);
+>>>>>>> branch 'master' of https://github.com/tonyy7/tdp-proyecto-2
 		
-		
+		new Juego(null);
 		
 		
 		

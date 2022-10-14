@@ -1,12 +1,16 @@
 package reloj;
 
-import java.util.TimerTask;
+import gui.GUI;
+import juego.Juego;
 
-public class Reloj extends TimerTask{
+public class Reloj extends Thread {
 	protected int time;
+	protected GUI gui;
+	protected Juego juego;
 	
-	public Reloj() {
+	public Reloj(Juego juego) {
 		time = 0;
+		this.juego = juego;
 	}
 	
 	public void run() {
@@ -17,15 +21,17 @@ public class Reloj extends TimerTask{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+			juego.actualizarTiempo();
 		}
 	}
 	
 	public String getTime() {
 		int m = time/60;
-		int s = time%60; 
-		
+		int s = time%60; 	
 		return (String.format("%02d", m)+":"+String.format("%02d", s));
 	}
 	
+	public int getSegundos() {
+		return time;
+	}
 }

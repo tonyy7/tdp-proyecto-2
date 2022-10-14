@@ -112,7 +112,7 @@ public class Snake implements Visitor{
 	/*
 	 * @return Position correspondiente a la direccion
 	 */
-	private Position getDireccionP() {
+	public Position getDireccionP() {
 		Position toReturn = null;
 		switch (direccion) {
 		case "arriba" : {
@@ -138,26 +138,31 @@ public class Snake implements Visitor{
 	public void visitAlimento1(Alimento1 a) {
 		crecerNBloques(a.getBloque());
 		juego.sumarPuntos(a.getPuntaje());
+		grilla.consumir(a);
 	}
 
 	public void visitAlimento2(Alimento2 a) {
 		crecerNBloques(a.getBloque());
 		juego.sumarPuntos(a.getPuntaje());
+		grilla.consumir(a);
 	}
 
 	public void visitAlimento3(Alimento3 a) {
 		crecerNBloques(a.getBloque());
 		juego.sumarPuntos(a.getPuntaje());
+		grilla.consumir(a);
 	}
 
 	public void visitAlimento4(Alimento4 a) {
 		crecerNBloques(a.getBloque());
 		juego.sumarPuntos(a.getPuntaje());
+		grilla.consumir(a);
 	}
 
 	public void visitAlimento5(Alimento5 a) {
 		crecerNBloques(a.getBloque());
 		juego.sumarPuntos(a.getPuntaje());
+		grilla.consumir(a);
 	}
 
 	/*
@@ -167,18 +172,21 @@ public class Snake implements Visitor{
 		cambiarSkin(p.getUrlCabeza(), p.getUrlCuerpo());
 		crecerNBloques(3);
 		juego.sumarPuntos(p.getPuntaje());
+		grilla.consumir(p);
 	}
 
 	public void visitPowerUp2(PowerUp2 p) {
 		cambiarSkin(p.getUrlCabeza(), p.getUrlCuerpo());
 		crecerNBloques(3);
 		juego.sumarPuntos(p.getPuntaje());
+		grilla.consumir(p);
 	}
 
 	public void visitPowerUp3(PowerUp3 p) {
 		cambiarSkin(p.getUrlCabeza(), p.getUrlCuerpo());
 		crecerNBloques(3);
 		juego.sumarPuntos(p.getPuntaje());
+		grilla.consumir(p);
 	}
 
 	public void visitCuerpo(Cuerpo c) {
