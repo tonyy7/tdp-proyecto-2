@@ -8,7 +8,7 @@ public class Nivel {
 	protected LinkedList<Ente>[][] grilla;
 	protected LinkedList<Ente> consumibles;
 	
-	public Nivel(LinkedList<Ente>[][]g, LinkedList<Ente> c) {
+	public Nivel(LinkedList<Ente>[][] g, LinkedList<Ente> c) {
 		grilla = g;
 		consumibles = c;
 	}

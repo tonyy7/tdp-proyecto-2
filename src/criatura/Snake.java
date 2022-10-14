@@ -25,7 +25,7 @@ public class Snake implements Visitor{
 	protected LinkedList<Cuerpo> cuerpo;
 	protected String urlCabeza;
 	protected String urlCuerpo;
-	protected static int TAMANIO = 3;
+	protected static int TAMANIO = 6;
 	
 	/*
 	 * Crea una instancia de Snake en la posicion p y en la direccion
@@ -84,7 +84,6 @@ public class Snake implements Visitor{
 	public void moverSnake() {
 		crecer();
 		cuerpo.removeLast();
-
 	}
 	
 	/*
@@ -108,10 +107,12 @@ public class Snake implements Visitor{
 			cuerpo.getFirst().setSkin(urlCuerpo);
 			cuerpo.addFirst(new Cuerpo(proxima));
 			cuerpo.getFirst().setSkin(urlCabeza);
-			grilla.setEnte(proxima, cuerpo.getFirst());		
+			grilla.setEnte(proxima, cuerpo.getFirst());	
+			grilla.removerEnte(cuerpo.getLast().getPosition());
 		}
 		else {
 			//codear colision con ente en la posicion proximna
+			System.out.println("hay consumible");
 			colision = grilla.getEnte(proxima);
 			colision.accept(this);
 		}

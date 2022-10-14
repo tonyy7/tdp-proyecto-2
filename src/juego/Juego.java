@@ -18,7 +18,7 @@ public class Juego extends Thread{
 	protected int puntajeActual; //puntaje actual del juego
 	protected Snake snake;
 	protected Grilla grilla;
-	protected Reloj timer;
+	protected Reloj timerVentana;
 	protected GameTimer gameTimer;
 	
 	protected Puntaje puntajes;
@@ -26,14 +26,14 @@ public class Juego extends Thread{
 	public Juego(Puntaje puntajes) {
 		//this.puntajes = puntajes;
 		grilla = new Grilla(this);
+		timerVentana = new Reloj(this);
+		ventana = new GUI(this, timerVentana);
+		ventana.generarGrilla();
 		initSnake();
 		grilla.setSnake(snake);
-		timer = new Reloj(this);
-		gameTimer = new GameTimer(snake);
-		ventana = new GUI(this, timer);
-		ventana.generarGrilla();
 		//Inicia reloj que controla el timepo en ventana
-		timer.start();
+		gameTimer = new GameTimer(snake);
+		timerVentana.start();
 		//Inicia reloj que controla el movimiento automatico de snake
 		gameTimer.start();
 		this.start();
@@ -42,6 +42,7 @@ public class Juego extends Thread{
 	public void run() {
 		while (true) {
 			actualizarCriatura();
+			getConsumible();
 		}
 	}
 	
@@ -82,7 +83,8 @@ public class Juego extends Thread{
 	
 	public void gameOver() {
 		//puntajes.setPuntaje(puntajeActual);
-		 System.out.println("muerto");
+		timerVentana.stop();
+		System.out.println("muerto");
 		cerrar();
 	}
 	
@@ -95,6 +97,7 @@ public class Juego extends Thread{
 	}
 	
 	public void cerrar() {
+		new SplashScreen(3,"assets/gameover.jpg");
 		System.exit(0);
 	}
 	
@@ -102,4 +105,8 @@ public class Juego extends Thread{
 		return grilla.getGrilla();
 	}
 	
+	public void getConsumible() {
+		if(grilla.getConsumible() != null)
+			ventana.setEnte(grilla.getConsumible());
+	}
 }

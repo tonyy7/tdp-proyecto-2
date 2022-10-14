@@ -18,6 +18,7 @@ public class Grilla {
 	protected static int MAX_NIVEL = 5;
 	protected Snake snake;
 	protected Juego juego;
+	protected Ente elemento;
 	
 	public Grilla(Juego juego) {
 		this.juego = juego;
@@ -25,11 +26,15 @@ public class Grilla {
 		nivelN = 1;
 		nivelActual = generadorNivel.generarNivel("assets/niveles/nivel"+nivelN+".txt");
 		grid = nivelActual.getGrilla();
-		//spawnConsumible();
+		spawnConsumible();
 	}
 	
 	public void setSnake(Snake snake) { 
 		this.snake = snake;
+	}
+	
+	public void removerEnte(Position p) {
+		grid[p.getX()][p.getY()].removeFirst();
 	}
 	
 	public void setEnte(Position pos, Ente e) {
@@ -68,11 +73,16 @@ public class Grilla {
 			if(grid[e.getPosition().getX()][e.getPosition().getY()] == null)
 				grid[e.getPosition().getX()][e.getPosition().getY()].addFirst(e);
 			else 
-				grid[e.getPosition().getX()][e.getPosition().getY()].add(2, e);						
+				grid[e.getPosition().getX()][e.getPosition().getY()].add(0, e);
+			elemento = e; 
 		}
 	}
 	
 	public boolean estaVacia(Position pos) {
 		return grid[pos.getX()][pos.getY()] == null;
+	}
+	
+	public Ente getConsumible() {
+		return elemento;
 	}
 }

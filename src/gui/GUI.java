@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.KeyAdapter;
 
 public class GUI extends JFrame {
@@ -25,17 +26,23 @@ public class GUI extends JFrame {
 	protected ControlTeclado teclado;
 	protected JLabel lblPuntaje;
 	protected JLabel lblNewLabel;
+	protected JLabel ente;
 	protected Reloj timer;
 	protected LinkedList<JLabel> pared;
-	private LinkedList<JLabel> snake;
+	protected LinkedList<JLabel> snake;
 	protected JPanel panelGrilla;
 	private Color colorTexto;
 	private Font fuenteTexto;
 	private JTextPane textPane;
 	
+	protected int frameX;
+	protected int frameY;
+	
 	
 	
 	public GUI(Juego juego, Reloj timer) {
+		frameX=1;
+		frameY=1;
 		pared = new LinkedList<JLabel>();
 		snake = new LinkedList<JLabel>();
 		this.juego = juego;
@@ -48,7 +55,7 @@ public class GUI extends JFrame {
 		
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(797, 783));
+		setSize(new Dimension(797, 658));
 		setResizable(false);
 		setLocationRelativeTo(null);		
 		
@@ -91,16 +98,25 @@ public class GUI extends JFrame {
 
 	}
 	
-	public void actualizarVentana(LinkedList<Cuerpo> pocisionSnake) {   
-		
-        for(int i=0; i<pocisionSnake.size(); i++) {
-        	
-        		JLabel cuerpo=new JLabel(new ImageIcon(pocisionSnake.get(i).getSkin()));
+	public void actualizarVentana(LinkedList<Cuerpo> posicionSnake) {  
+		int posX = 0;
+		int posY = 0;
+		Point aux = new Point(0,0);
+		if(snake.isEmpty()) {
+			for(int i=0; i<posicionSnake.size(); i++) {      
+				
+        		JLabel cuerpo=new JLabel(new ImageIcon(posicionSnake.get(i).getSkin()));
         		snake.addLast(cuerpo);
         		panelGrilla.add(cuerpo);
-        		cuerpo.setBounds(pocisionSnake.get(i).getPosition().getX()*30, pocisionSnake.get(i).getPosition().getY()*30,30,30);
-        	
-        }
+        		cuerpo.setBounds(posicionSnake.get(i).getPosition().getX(), posicionSnake.get(i).getPosition().getY(),30,30);        		
+			}
+		}
+		else {
+			for(int i=0; i<snake.size(); i++) {			
+				aux.setLocation(posicionSnake.get(i).getPosition().getX()*30, posicionSnake.get(i).getPosition().getY()*30);
+				snake.get(i).setLocation(aux);
+			}
+		}
     }
 
 	
@@ -117,6 +133,12 @@ public class GUI extends JFrame {
 				}
 			}
 		}
+	}
+	
+	public void setEnte(Ente e) {
+		ente = new JLabel(new ImageIcon(e.getSkin()));
+		panelGrilla.add(ente);
+		ente.setBounds(e.getPosition().getX()*30, e.getPosition().getY()*30, 30, 30);
 	}
 	
 	public void setTiempo() {
