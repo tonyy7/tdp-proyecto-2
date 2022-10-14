@@ -32,6 +32,10 @@ public class Grilla {
 		this.snake = snake;
 	}
 	
+	public void setEnte(Position pos, Ente e) {
+		grid[pos.getX()][pos.getY()].addFirst(e);
+	}
+	
 	public LinkedList<Ente>[][] getGrilla(){
 		return grid;
 	}
@@ -58,9 +62,14 @@ public class Grilla {
 	private void spawnConsumible() {
 		Ente e = nivelActual.getconsumible();
 		if(e == null) {
-			juego.aumentarNivel();
+			cargarNivel();
 		}
-		grid[e.getPosition().getX()][e.getPosition().getY()].addFirst(e);		
+		else {
+			if(grid[e.getPosition().getX()][e.getPosition().getY()] == null)
+				grid[e.getPosition().getX()][e.getPosition().getY()].addFirst(e);
+			else 
+				grid[e.getPosition().getX()][e.getPosition().getY()].add(2, e);						
+		}
 	}
 	
 	public boolean estaVacia(Position pos) {

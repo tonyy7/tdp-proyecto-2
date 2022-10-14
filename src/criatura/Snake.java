@@ -23,6 +23,8 @@ public class Snake implements Visitor{
 	protected Juego juego;
 	protected Grilla grilla;
 	protected LinkedList<Cuerpo> cuerpo;
+	protected String urlCabeza;
+	protected String urlCuerpo;
 	protected static int TAMANIO = 3;
 	
 	/*
@@ -34,6 +36,8 @@ public class Snake implements Visitor{
 		this.direccion = direccion;
 		this.juego = juego;
 		this.grilla = grilla;
+		urlCabeza = "assets/snake/cabeza.png";
+		urlCuerpo = "assets/snake/cuerpo.png";
 		init(p);
 	}
 	
@@ -44,13 +48,15 @@ public class Snake implements Visitor{
 		Position posDireccion = getDireccionP();
 		Position posSiguiente;
 		Cuerpo insert;
-		cuerpo.add(new Cuerpo(p));
-		cuerpo.getFirst().setSkin("assets/snake/cabeza.png");
+		cuerpo.addFirst(new Cuerpo(p));
+		cuerpo.getFirst().setSkin(urlCabeza);
+		grilla.setEnte(cuerpo.getFirst().getPosition(), cuerpo.getFirst());
 		for(int i=1; i<TAMANIO; i++) {
 			posSiguiente = cuerpo.get(i).getPosition();
 			insert = new Cuerpo(new Position(posSiguiente.getX()-posDireccion.getX(), posSiguiente.getY()-posDireccion.getY()));
 			cuerpo.addLast(insert);
-			cuerpo.get(i).setSkin("assets/snake/cuerpo.png");
+			cuerpo.get(i).setSkin(urlCuerpo);
+			grilla.setEnte(insert.getPosition(), insert);
 		}
 	}
 	
@@ -98,8 +104,10 @@ public class Snake implements Visitor{
 		Position proxima = new Position(posCabeza.getX()+posDireccion.getX(), posCabeza.getY()+posDireccion.getY());
 		Ente colision;
 		if(grilla.estaVacia(proxima)) {
-			cuerpo.getFirst().setPosition(proxima);
-			cuerpo.add(2, new Cuerpo(new Position(posCabeza.getX()-posDireccion.getX(), posCabeza.getY()-posDireccion.getY())));			
+			cuerpo.getFirst().setSkin(urlCuerpo);
+			cuerpo.addFirst(new Cuerpo(proxima));
+			cuerpo.getFirst().setSkin(urlCabeza);
+			grilla.setEnte(proxima, cuerpo.getFirst());		
 		}
 		else {
 			//codear colision con ente en la posicion proximna
@@ -108,6 +116,17 @@ public class Snake implements Visitor{
 		}
 	}
 	
+	/*
+	 * Cambia la skin correspondiente a snake
+	 */
+	private void cambiarSkin(String urlCabeza, String urlCuerpo) {
+		this.urlCabeza = urlCabeza;
+		this.urlCuerpo = urlCuerpo;
+		cuerpo.getFirst().setSkin(this.urlCabeza);
+		for(int i=2; i<cuerpo.size(); i++) {
+			cuerpo.get(i).setSkin(this.urlCuerpo);
+		}
+	}
 	
 	/*
 	 * @return Position correspondiente a la direccion
@@ -195,12 +214,5 @@ public class Snake implements Visitor{
 
 	public void visitPared(Pared p) {
 		juego.gameOver();
-	}
-	
-	private void cambiarSkin(String urlCabeza, String urlCuerpo) {
-		cuerpo.getFirst().setSkin(urlCabeza);
-		for(int i=2; i<cuerpo.size(); i++) {
-			cuerpo.get(i).setSkin(urlCuerpo);
-		}
 	}
 }

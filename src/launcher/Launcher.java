@@ -16,7 +16,7 @@ public class Launcher {
 	private static String file = "puntaje/puntaje.p";
 
 	public static void main(String[] args) {		
-		new SplashScreen(1);
+		new SplashScreen(1,"assets/splashScreen/SplashScreen.png");
 		new Juego(null);
 		
 

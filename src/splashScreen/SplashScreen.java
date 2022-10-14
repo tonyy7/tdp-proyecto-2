@@ -10,10 +10,10 @@ public class SplashScreen extends JWindow {
 	/*
 	 * Crear una SplashScreen, con tiempo en segundos
 	 */
-	public SplashScreen(int tiempo) {
+	public SplashScreen(int tiempo, String url) {
 		this.tiempo = tiempo;
 		JPanel panel = (JPanel) getContentPane();
-		ImageIcon img 	= new ImageIcon("assets/splashScreen/SplashScreen.png");
+		ImageIcon img 	= new ImageIcon(url);
 		
 		panel.add(new JLabel(img), BorderLayout.CENTER);
 		setSize(img.getIconWidth(), img.getIconHeight());

@@ -41,8 +41,7 @@ public class GUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(800, 655));
 		setResizable(false);
-		setLocationRelativeTo(null);
-		
+		setLocationRelativeTo(null);		
 		
 		JPanel panelGrilla = new JPanel();
 		panelGrilla.setBackground(new Color(233, 246, 255));
@@ -53,8 +52,6 @@ public class GUI extends JFrame {
 		lblPuntaje.setForeground(new Color(255, 255, 0));
 		lblPuntaje.setBounds(638, 88, 130, 40);
 		lblPuntaje.setBackground(colorTexto);
-		
-
 		
 		JButton btnmenu = new JButton("menu");
 		btnmenu.addActionListener(new ActionListener() {

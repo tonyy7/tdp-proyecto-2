@@ -7,6 +7,7 @@ import gui.GUI;
 import puntaje.Puntaje;
 import reloj.GameTimer;
 import reloj.Reloj;
+import splashScreen.SplashScreen;
 
 public class Juego extends Thread{
 	protected GUI ventana;
@@ -26,12 +27,12 @@ public class Juego extends Thread{
 		grilla.setSnake(snake);
 		*/
 		timer = new Reloj(this);
-		//gameTimer = new GameTimer(snake);
+		gameTimer = new GameTimer(snake);
 		ventana = new GUI(this, timer);
 		//Inicia reloj que controla el timepo en ventana
 		timer.start();
 		//Inicia reloj que controla el movimiento automatico de snake
-		//gameTimer.start();
+		gameTimer.start();
 	}
 	
 	public void run() {
@@ -40,17 +41,10 @@ public class Juego extends Thread{
 		}
 	}
 	
-	
-	
-	
-	
 	private void initSnake() {
 		String dir[] = {"arriba", "abajo", "izquierda", "derecha"};
 		String direccionSnake = dir[(int)(Math.random()*3)];
-		Position rand = new Position((int)(Math.random()*20), (int)(Math.random()*20));
-		while(grilla.getEnte(rand) != null) {
-			rand = new Position((int)(Math.random()*20), (int)(Math.random()*20));
-		}
+		Position rand = new Position((int) ((Math.random() *13) + 4), (int) ((Math.random() *13) + 4));
 		snake = new Snake(rand, direccionSnake, this, grilla);
 	}
 	
@@ -85,14 +79,6 @@ public class Juego extends Thread{
 	public void gameOver() {
 		puntajes.setPuntaje(puntajeActual);
 		cerrar();
-	}
-	
-	public void setPuntaje(Puntaje p) {
-		
-	}
-	
-	public void aumentarNivel() {
-		
 	}
 	
 	public int getPuntajeActaul() {
