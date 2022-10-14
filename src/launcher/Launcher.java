@@ -15,22 +15,12 @@ public class Launcher {
 	
 	private static String file = "puntaje/puntaje.p";
 
-	public static void main(String[] args) {
-		
-		//new SplashScreen(1);
-		
+	public static void main(String[] args) {		
+		new SplashScreen(1);
 		new Juego(null);
 		
-		
-		
-		/* PARA GENERAR PUNTAJE
-		try {
-			Launcher.guardarPuntaje(puntajeHistorico);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		*/
-		
+
+		//juego.start();
 		
 		/* PARA LEER PUNTAJE
 		try {

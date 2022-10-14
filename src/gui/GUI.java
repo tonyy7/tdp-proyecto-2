@@ -54,6 +54,7 @@ public class GUI extends JFrame {
 		lblPuntaje.setBounds(638, 88, 130, 40);
 		lblPuntaje.setBackground(colorTexto);
 		
+
 		
 		JButton btnmenu = new JButton("menu");
 		btnmenu.addActionListener(new ActionListener() {
@@ -111,6 +112,7 @@ public class GUI extends JFrame {
 					}
 					case KeyEvent.VK_UP:
 					{
+						System.out.println("HOliss");
 						teclado.generadorPosition("arriba");
 						break;
 					}

@@ -1,8 +1,5 @@
 package juego;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import Position.Position;
 import criatura.Snake;
 import grilla.Grilla;
@@ -11,7 +8,7 @@ import puntaje.Puntaje;
 import reloj.GameTimer;
 import reloj.Reloj;
 
-public class Juego {
+public class Juego extends Thread{
 	protected GUI ventana;
 	protected int maxPuntaje; //seteado por nivel
 	protected int puntajeActual; //puntaje actual del juego
@@ -23,18 +20,29 @@ public class Juego {
 	protected Puntaje puntajes;
 	
 	public Juego(Puntaje puntajes) {
-		//this.puntajes = puntajes;
-		//grilla = new Grilla(this);
-		//initSnake();
-		//grilla.setSnake(snake);
+		/*this.puntajes = puntajes;
+		grilla = new Grilla(this);
+		initSnake();
+		grilla.setSnake(snake);
+		*/
 		timer = new Reloj(this);
-		gameTimer = new GameTimer(snake);
+		//gameTimer = new GameTimer(snake);
 		ventana = new GUI(this, timer);
 		//Inicia reloj que controla el timepo en ventana
 		timer.start();
 		//Inicia reloj que controla el movimiento automatico de snake
-		gameTimer.start();
+		//gameTimer.start();
 	}
+	
+	public void run() {
+		while (true) {
+			actualizarCriatura();
+		}
+	}
+	
+	
+	
+	
 	
 	private void initSnake() {
 		String dir[] = {"arriba", "abajo", "izquierda", "derecha"};
@@ -98,6 +106,5 @@ public class Juego {
 	public void cerrar() {
 		System.exit(0);
 	}
-	
 	
 }

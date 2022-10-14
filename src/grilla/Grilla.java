@@ -22,7 +22,7 @@ public class Grilla {
 	public Grilla(Juego juego) {
 		this.juego = juego;
 		generadorNivel = new GeneradorNivel();
-		nivelActual = generadorNivel.generarNivel("nivel1.txt");
+		nivelActual = generadorNivel.generarNivel("niveles/nivel1.txt");
 		nivelN = 1;
 		grid = nivelActual.getGrilla();
 		spawnConsumible();
