@@ -3,7 +3,7 @@ package ente.alimento;
 import ente.Ente;
 
 public abstract class Alimento extends Ente {
-	private static final int maxPuntaje=100;
+	protected final int maxPuntaje=100;
 	protected int bloque;
 	protected int puntaje;
 	

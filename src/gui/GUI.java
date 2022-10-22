@@ -44,8 +44,6 @@ public class GUI extends JFrame {
 	
 	
 	public GUI(Juego juego, Reloj timer) {
-		frameX=1;
-		frameY=1;
 		pared = new LinkedList<JLabel>();
 		snake = new LinkedList<JLabel>();
 		consumibles = new LinkedList<JLabel>();
@@ -65,7 +63,7 @@ public class GUI extends JFrame {
 		
 		panelGrilla = new JPanel();
 		panelGrilla.setBackground(new Color(233, 246, 255));
-		panelGrilla.setBounds(10, 10, 600, 600);
+		panelGrilla.setBounds(10, 10, 600, 600);;
 		
 		textPanePuntos = new JTextPane();
 		textPanePuntos.setText("PUNTAJE: 0");
@@ -90,10 +88,7 @@ public class GUI extends JFrame {
 		getContentPane().add(panelGrilla);
 		panelGrilla.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel(new ImageIcon("assets/grilla/gilla.png"));
-		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_1.setBounds(0, 0, 600, 600);
-		panelGrilla.add(lblNewLabel_1);
+		
 		
 		getContentPane().add(textPaneTiempo);
 
