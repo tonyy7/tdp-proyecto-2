@@ -101,7 +101,7 @@ public class Snake implements Visitor{
 		this.urlCabeza = urlCabeza;
 		this.urlCuerpo = urlCuerpo;
 		cuerpo.getFirst().setSkin(this.urlCabeza);
-		for(int i=2; i<cuerpo.size(); i++) {
+		for(int i=1; i<cuerpo.size(); i++) {
 			cuerpo.get(i).setSkin(this.urlCuerpo);
 		}
 	}

@@ -78,7 +78,7 @@ public class Juego extends Thread{
 	}
 	
 	public void moverCriatura() {
-		Position pos = snake.moverSnake();		
+		Position pos = snake.moverSnake();
 		if(grilla.getEnte(pos) != null) {
 			grilla.getEnte(pos).accept(snake);
 			ventana.eliminarConsumible();
