@@ -34,12 +34,16 @@ public class Grilla {
 	}
 	
 	public void removerEnte(Position p) {
-		if(!grid[p.getX()][p.getY()].isEmpty())
-            grid[p.getX()][p.getY()].removeFirst();
+		if(p.getX()<60 && p.getX()>=0 && p.getY()<60 && p.getY()>=0) {
+			if(!grid[p.getX()][p.getY()].isEmpty())
+				grid[p.getX()][p.getY()].removeFirst();
+		}
 	}
 	
 	public void setEnte(Position pos, Ente e) {
-		grid[pos.getX()][pos.getY()].addFirst(e);
+		if(pos.getX()<60 && pos.getX()>=0 && pos.getY()<60 && pos.getY()>=0) {
+			grid[pos.getX()][pos.getY()].addFirst(e);
+		}
 	}
 	
 	public LinkedList<Ente>[][] getGrilla(){
@@ -47,7 +51,7 @@ public class Grilla {
 	}
 	
 	public Ente getEnte(Position p) {
-		if(grid[p.getX()][p.getY()].isEmpty())
+		if(p.getX()>59 || p.getX()<0 || p.getY()>59 || p.getY()<0 || grid[p.getX()][p.getY()].isEmpty())
             return null;
         else
             return grid[p.getX()][p.getY()].getFirst();
