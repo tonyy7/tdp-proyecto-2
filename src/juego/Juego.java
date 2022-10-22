@@ -48,7 +48,7 @@ public class Juego extends Thread{
 		while (true) {
 			moverCriatura();
 			try {
-				Thread.sleep(100);
+				Thread.sleep(150);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -73,7 +73,7 @@ public class Juego extends Thread{
 	public void updateCriatura(Position pos) {
 		if(posValida(pos)) {
 			snake.setDireccion(pos);
-			moverCriatura();
+			//moverCriatura();
 		}
 	}
 	
@@ -113,6 +113,7 @@ public class Juego extends Thread{
 	public void gameOver() {
 		//puntajes.setPuntaje(puntajeActual);
 		//timerVentana.stop(); NO USAR
+		
 		cerrar();
 	}
 	
@@ -126,6 +127,7 @@ public class Juego extends Thread{
 	
 	public void cerrar() {
 		new SplashScreen(4,"assets/gameover/gameover.png");
+		System.out.println("hola");
 		System.exit(0);
 	}
 	

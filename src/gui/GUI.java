@@ -89,7 +89,14 @@ public class GUI extends JFrame {
 		
 		getContentPane().add(panelGrilla);
 		panelGrilla.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel(new ImageIcon("assets/grilla/gilla.png"));
+		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel_1.setBounds(0, 0, 600, 600);
+		panelGrilla.add(lblNewLabel_1);
+		
 		getContentPane().add(textPaneTiempo);
+
 		
 		getContentPane().add(textPanePuntos);
 
