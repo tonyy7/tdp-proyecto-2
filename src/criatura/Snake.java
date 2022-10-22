@@ -26,8 +26,8 @@ public class Snake implements Visitor{
 		cuerpo = new LinkedList<Cuerpo>();
 		this.juego = juego;
 		this.direccion = direccion;
-		urlCabeza = "assets/cabeza.png";
-		urlCuerpo = "assets/cuerpo.png";
+		urlCabeza = "assets/snake/cabeza.png";
+		urlCuerpo = "assets/snake/cuerpo.png";
 		initSnake(cabeza);
 	}
 	

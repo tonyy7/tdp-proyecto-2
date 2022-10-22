@@ -12,7 +12,7 @@ import juego.Juego;
 
 public class Grilla {
 	protected LinkedList<Ente> grid[][];
-	protected int nivelN;
+	protected int nivelN; 
 	protected GeneradorNivel generadorNivel;
 	protected Nivel nivelActual;
 	protected static int MAX_NIVEL = 5;
