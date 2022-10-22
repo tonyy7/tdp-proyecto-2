@@ -16,15 +16,17 @@ public class Launcher {
 	private static String file = "puntaje/puntaje.p";
 
 	public static void main(String[] args) {		
-		new SplashScreen(3,"assets/splashScreen/SplashScreen.png");
+		//new SplashScreen(3,"assets/splashScreen/SplashScreen.png");
 		
-		Puntaje puntajeHistorico;
+		//Puntaje puntajeHistorico;
 		try {
-			puntajeHistorico = leerPuntaje();
-			new Juego(puntajeHistorico);
+			//puntajeHistorico = leerPuntaje();
+			new Juego(null);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
+		//System.out.println((10+1)*30 - 328);
 	}
 	
 	public static void guardarPuntaje(Puntaje p) throws Exception {

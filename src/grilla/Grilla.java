@@ -19,7 +19,6 @@ public class Grilla {
 	protected Snake snake;
 	protected Juego juego;
 	protected Ente elemento;
-	protected Ente elementoConsumido;
 	
 	
 	public Grilla(Juego juego) {
@@ -27,8 +26,7 @@ public class Grilla {
 		generadorNivel = new GeneradorNivel();
 		nivelN = 1;
 		nivelActual = generadorNivel.generarNivel("assets/niveles/nivel"+nivelN+".txt");
-		grid = nivelActual.getGrilla();
-		spawnConsumible();
+		grid = nivelActual.getGrilla();		
 	}
 	
 	public void setSnake(Snake snake) { 
@@ -59,30 +57,30 @@ public class Grilla {
 		nivelN++;
 		if(nivelN++ <= MAX_NIVEL) {
 			nivelActual = generadorNivel.generarNivel("assets/niveles/nivel"+nivelN+".txt");
-			grid = nivelActual.getGrilla();
+			grid = nivelActual.getGrilla();			
 		}
 		else
 			juego.gameOver();
 	}
 	
-	public void consumir(Ente a) {
-		elementoConsumido = a;
-		grid[a.getPosition().getX()][a.getPosition().getY()].removeFirst();
+	public Ente consumir(Ente a) {
+		Ente toReturn = grid[a.getPosition().getX()][a.getPosition().getY()].removeFirst();
 		spawnConsumible();
+		return toReturn;
 	}
 	
-	private void spawnConsumible() {
+	public void spawnConsumible() {		
 		Ente e = nivelActual.getconsumible();
 		if(e == null) {
-			cargarNivel();
+			//cargarNivel(); corta el juego cuando carga en nivel, falta implementar como cambia
 		}
 		else {
 			if(grid[e.getPosition().getX()][e.getPosition().getY()] == null)
 				grid[e.getPosition().getX()][e.getPosition().getY()].addFirst(e);
 			else 
 				grid[e.getPosition().getX()][e.getPosition().getY()].add(0, e);
-			elemento = e; 
-		}
+			elemento = e;
+		}		
 	}
 	
 	public boolean estaVacia(Position pos) {
@@ -91,9 +89,5 @@ public class Grilla {
 	
 	public Ente getConsumible() {
 		return elemento;
-	}
-	
-	public Ente getElementoConsumido() {
-		return elementoConsumido;
 	}
 }

@@ -4,7 +4,7 @@ import criatura.Snake;
 
 public class GameTimer extends Thread {
 	protected Snake snake;
-	private static int FRAME = 150;
+	private static int FRAME = 200;
 	
 	public GameTimer(Snake snake) {
 		this.snake = snake;

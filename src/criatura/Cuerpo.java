@@ -7,9 +7,9 @@ import visitor.Visitor;
 
 public class Cuerpo extends Ente {
 	
-	public Cuerpo(Position p) {
+	public Cuerpo(Position p, String skin) {
 		this.posicion=p;
-		this.grafico=new EnteGrafico("");
+		this.grafico=new EnteGrafico(p, skin);
 	}
 	
 	public void setSkin(String url) {

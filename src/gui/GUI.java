@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import criatura.Cuerpo;
 import ente.Ente;
+import ente.EnteGrafico;
 import grilla.Grilla;
 import juego.Juego;
 import reloj.Reloj;
@@ -94,60 +95,59 @@ public class GUI extends JFrame {
 
 	}
 	
-	public void actualizarVentana(LinkedList<Cuerpo> posicionSnake) {  
-		int posX = 0;
-		int posY = 0;
-		Point aux = new Point(0,0);
-		if(snake.isEmpty()) {
-			for(int i=0; i<posicionSnake.size(); i++) {      
-				
-        		JLabel cuerpo=new JLabel(new ImageIcon(posicionSnake.get(i).getSkin()));
-        		snake.addLast(cuerpo);
-        		panelGrilla.add(cuerpo);
-        		cuerpo.setBounds(posicionSnake.get(i).getPosition().getX(), posicionSnake.get(i).getPosition().getY(),30,30);        		
-			}
-		}
-		else {
-			for(int i=0; i<snake.size(); i++) {			
-				aux.setLocation(posicionSnake.get(i).getPosition().getX()*30, posicionSnake.get(i).getPosition().getY()*30);
-				snake.get(i).setLocation(aux);
-			}
-		}
-    }
-
-	
 	public void generarGrilla() {
 		LinkedList<Ente>[][] grillaLogica = juego.getGrilla();
 		JLabel insert;
-		for(int i=0; i<20; i++) {
-			for(int j=0; j<20; j++) {
+		for(int i=0; i<60; i++) {
+			for(int j=0; j<60; j++) {
 				if(grillaLogica[i][j].getFirst() != null) {
 					insert = new JLabel(new ImageIcon(grillaLogica[i][j].getFirst().getSkin()));
 					pared.addLast(insert);
 					panelGrilla.add(insert);
-					insert.setBounds((grillaLogica[i][j].getFirst().getPosition().getX())*30,(grillaLogica[i][j].getFirst().getPosition().getY())*30, 30, 30);
+					insert.setBounds((grillaLogica[i][j].getFirst().getPosition().getX())*10,(grillaLogica[i][j].getFirst().getPosition().getY())*10, 10, 10);
 				}
 			}
 		}
 	}
 	
-	public void setEnte(Ente e) {
-		ente = new JLabel(new ImageIcon(e.getSkin()));
-		panelGrilla.add(ente);
-		ente.setBounds(e.getPosition().getX()*30, e.getPosition().getY()*30, 30, 30);
-		consumibles.addLast(ente);
+	public void actualizarCriatura(LinkedList<EnteGrafico> cuerpoSnake) {
+		Point aux = new Point(0,0);
+		if(snake.isEmpty()) {
+			for(EnteGrafico e : cuerpoSnake) {
+				JLabel cuerpo = new JLabel(new ImageIcon(e.getSkin()));
+				snake.addLast(cuerpo);
+				cuerpo.setBounds(e.getPosicion().getX(), e.getPosicion().getY(), 10, 10);
+				panelGrilla.add(cuerpo);
+			}
+		}
+		for(int i=0; i<cuerpoSnake.size(); i++) {
+			aux.setLocation(cuerpoSnake.get(i).getPosicion().getX(), cuerpoSnake.get(i).getPosicion().getY());
+			snake.get(i).setLocation(aux);			
+		}
 	}
 	
-	public void removerEnte(Ente e) {
-		consumibles.getFirst().setIcon(null);	
+	public void setConsumible(EnteGrafico e) {
+		JLabel cons = new JLabel(new ImageIcon(e.getSkin()));
+		cons.setBounds(e.getPosicion().getX()*10, e.getPosicion().getY()*10, 10, 10);
+		panelGrilla.add(cons);
+		consumibles.addFirst(cons);
+		panelGrilla.repaint();
 	}
+	
+	public void eliminarConsumible() {
+		if(!consumibles.isEmpty()) {
+			panelGrilla.remove(consumibles.removeFirst());
+			panelGrilla.repaint();
+		}
+	}
+
 	
 	public void setTiempo() {
 		textPaneTiempo.setText("TIEMPO: "+timer.getTime());
 	}
 	
-	public void setPuntaje(int puntaje) {
-		lblPuntaje.setText("PUNTAJE: "+puntaje);
+	public void setPuntaje(int p) {
+		textPanePuntos.setText("PUNTAJE: "+p);
 	}
 	
 	private void initKeyBindings() {
@@ -173,6 +173,11 @@ public class GUI extends JFrame {
 					case KeyEvent.VK_DOWN:
 					{
 						teclado.generadorPosition("abajo");
+						break;
+					}
+					case KeyEvent.VK_SPACE:
+					{
+						teclado.generadorPosition("espacio");
 						break;
 					}
 					case KeyEvent.VK_ESCAPE:

@@ -1,5 +1,6 @@
 package gui;
 
+import Position.Position;
 import juego.Juego;
 
 public class ControlTeclado {
@@ -12,27 +13,32 @@ public class ControlTeclado {
 		switch (dir) {
 		case "izquierda": 
 		{
-			juego.moverCriatura(-1, 0);
+			juego.updateCriatura(new Position(-1,0));
 			break;
 		}
 		case "derecha":
 		{
-			juego.moverCriatura(1, 0);
+			juego.updateCriatura(new Position(1,0));
 			break;
 		}
 		case "arriba":
 		{
-			juego.moverCriatura(0, -1);
+			juego.updateCriatura(new Position(0,-1));
 			break;
 		}
 		case "abajo":
 		{
-			juego.moverCriatura(0, 1);
+			juego.updateCriatura(new Position(0,1));
+			break;
+		}
+		case "espacio":
+		{
+			juego.moverCriatura();
 			break;
 		}
 		case "salir":
 		{
-			juego.cerrar();
+			//juego.cerrar();
 			break;
 		}
 		}

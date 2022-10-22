@@ -29,29 +29,29 @@ public class GeneradorNivel implements FactoryLevel {
 	 * como pared. 
 	 */
 	public GeneradorNivel() {
-		miNivel = (LinkedList<Ente>[][]) new LinkedList[20][20];
+		miNivel = (LinkedList<Ente>[][]) new LinkedList[60][60];
 		consumibles = new LinkedList<Ente>();
 		
-		for(int i = 0; i < 20; i++) { //Inicia la grilla
-			for (int j = 0; j < 20; j++) {
+		for(int i = 0; i < 60; i++) { //Inicia la grilla
+			for (int j = 0; j < 60; j++) {
 				miNivel[i][j] = new LinkedList<Ente>();
 				miNivel[i][j].addFirst(null);
 			}
 		}
 		
 		//Generan las paredes en los bordes de la grilla
-		for(int i = 0; i < 20; i++) {
+		for(int i = 0; i < 60; i++) {
 			miNivel[0][i].addFirst(new Pared(new Position(i,0)));
 		}
-		for (int i = 0; i < 20; i++) {
-			miNivel[19][i].addFirst(new Pared(new Position(i,19)));
+		for (int i = 0; i < 60; i++) {
+			miNivel[59][i].addFirst(new Pared(new Position(i,59)));
 		}
 		
-		for(int i = 1; i < 19; i++) {
-			miNivel[i][19].addFirst(new Pared(new Position(19,i)));
+		for(int i = 1; i < 59; i++) {
+			miNivel[i][59].addFirst(new Pared(new Position(59,i)));
 		}
 		
-		for(int i = 1; i < 19; i++) {
+		for(int i = 1; i < 59; i++) {
 			miNivel[i][0].addFirst(new Pared(new Position(0,i)));
 		}
 		

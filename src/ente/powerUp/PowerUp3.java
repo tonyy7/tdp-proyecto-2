@@ -8,7 +8,7 @@ public class PowerUp3 extends PowerUp {
 	public PowerUp3(Position p) {
 		this.posicion=p;
 		this.puntaje=100;	
-		this.grafico= new EnteGrafico("assets/powerup/powerup3.png");
+		this.grafico= new EnteGrafico(p, "assets/powerup/powerup3.png");
 		this.urlCabeza = "assets/snake/cabeza3.png";
 		this.urlCuerpo = "assets/snake/cuerpo3.png";
 	}
