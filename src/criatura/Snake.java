@@ -16,6 +16,8 @@ public class Snake implements Visitor{
 	protected String urlCabeza;
 	protected String urlCuerpo;
 	protected static int TAMANIO = 3;
+	protected int acarreo;
+	protected boolean hayCarry;
 	
 	/*
 	 * Crea una instancia de Snake en la posicion cabeza y en la direccion
@@ -26,6 +28,7 @@ public class Snake implements Visitor{
 		cuerpo = new LinkedList<Cuerpo>();
 		this.juego = juego;
 		this.direccion = direccion;
+		acarreo = 0;
 		urlCabeza = "assets/snake/cabeza.png";
 		urlCuerpo = "assets/snake/cuerpo.png";
 		initSnake(cabeza);
@@ -52,7 +55,13 @@ public class Snake implements Visitor{
 		Position proxima = new Position(posCabeza.getX()+direccion.getX(), posCabeza.getY()+direccion.getY());
 		cuerpo.getFirst().setSkin(urlCuerpo);
 		cuerpo.addFirst(new Cuerpo(proxima, urlCabeza));
-		cuerpo.removeLast();
+		hayCarry = false;
+		if(acarreo == 0)
+			cuerpo.removeLast();
+		else {
+			acarreo--;
+			hayCarry = true;
+		}
 		return cuerpo.getFirst().getPosition();
 	}
 	
@@ -76,6 +85,11 @@ public class Snake implements Visitor{
 	public Position getDireccion() {
 		return direccion;
 	}
+	
+	public boolean hayCarry() {
+		return hayCarry;
+	}
+	
 
 	public void setDireccion(Position direccion) {
 		this.direccion = direccion;
@@ -85,10 +99,10 @@ public class Snake implements Visitor{
 	/*
 	 * Agrega un bloque a snake en la posicion pos.
 	 */
-	public void crecer(Position pos) {
-		Cuerpo insert = new Cuerpo(pos, urlCuerpo);
-		cuerpo.addLast(insert);
-	}
+	//public void crecer(Position pos) {
+	//	Cuerpo insert = new Cuerpo(pos, urlCuerpo);
+	//	cuerpo.addLast(insert);
+	//}
 	
 	public LinkedList<Cuerpo> getCuerpo() {
         return cuerpo;
@@ -109,10 +123,12 @@ public class Snake implements Visitor{
 
 	public void visitAlimento1(Alimento1 a) {
 		juego.sumarPuntos(a.getPuntaje());
+		acarreo = acarreo+3;
 	}
 
 	public void visitAlimento2(Alimento2 a) {
 		juego.sumarPuntos(a.getPuntaje());
+		acarreo = acarreo+4; 
 	}
 
 	public void visitAlimento3(Alimento3 a) {

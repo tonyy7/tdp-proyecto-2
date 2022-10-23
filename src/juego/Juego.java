@@ -94,7 +94,9 @@ public class Juego extends Thread{
 		LinkedList<EnteGrafico> cuerpoSnakeGrafico = new LinkedList<EnteGrafico>();
 		LinkedList<Cuerpo> cuerpoSnake = snake.getCuerpo();
 		grilla.setEnte(cuerpoSnake.getFirst().getPosition(), cuerpoSnake.getFirst());
-		grilla.removerEnte(cuerpoSnake.getLast().getPosition());
+		if(!snake.hayCarry()) {
+			grilla.removerEnte(cuerpoSnake.getLast().getPosition());
+		}
 		for(Cuerpo c : cuerpoSnake) {
 			aux = c.getPosition();
 			enteGrafico = new Position(aux.getX()*10, aux.getY()*10);

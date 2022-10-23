@@ -122,6 +122,13 @@ public class GUI extends JFrame {
 				panelGrilla.add(cuerpo);
 			}
 		}
+		if(cuerpoSnake.size() > snake.size()) {
+			EnteGrafico e = cuerpoSnake.getLast();
+			JLabel cuerpo = new JLabel(new ImageIcon(e.getSkin()));
+			snake.addLast(cuerpo);
+			cuerpo.setBounds(e.getPosicion().getX(), e.getPosicion().getY(), 10, 10);
+			panelGrilla.add(cuerpo);
+		}
 		for(int i=0; i<cuerpoSnake.size(); i++) {
 			aux.setLocation(cuerpoSnake.get(i).getPosicion().getX(), cuerpoSnake.get(i).getPosicion().getY());
 			snake.get(i).setLocation(aux);			
