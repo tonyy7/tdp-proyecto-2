@@ -8,7 +8,7 @@ import java.util.List;
 public class Puntaje implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	protected List<Integer> puntajeHistorico;
+	protected LinkedList<Integer> puntajeHistorico;
 	
 	public Puntaje( ) {
 		puntajeHistorico = new LinkedList<Integer>();
@@ -18,7 +18,7 @@ public class Puntaje implements Serializable {
 	 *	Agrega el puntaje a la lista 
 	 */
 	public void setPuntaje(int puntaje) {
-		puntajeHistorico.add(puntaje);
+		puntajeHistorico.addLast(puntaje);
 	}
 	
 	/*
@@ -35,7 +35,7 @@ public class Puntaje implements Serializable {
 	 * Ordena los puntajes en forma descendente y quita los que no entran en el top 10.
 	 */
 	private void ordenarPuntajes() {
-		List<Integer> aux = new LinkedList<Integer>();
+		LinkedList<Integer> aux = new LinkedList<Integer>();
 		int estado = 0;
 		Collections.sort(puntajeHistorico, Collections.reverseOrder());
 		for(int a : puntajeHistorico) {

@@ -59,9 +59,11 @@ public class Grilla {
 	
 	public void cargarNivel() {
 		nivelN++;
-		if(nivelN++ <= MAX_NIVEL) {
+		if(nivelN <= MAX_NIVEL) {
+			generadorNivel.iniciarNivel();
 			nivelActual = generadorNivel.generarNivel("assets/niveles/nivel"+nivelN+".txt");
-			grid = nivelActual.getGrilla();			
+			grid = nivelActual.getGrilla();		
+			juego.cambiarNivel();
 		}
 		else
 			juego.gameOver();
@@ -76,7 +78,7 @@ public class Grilla {
 	public void spawnConsumible() {		
 		Ente e = nivelActual.getconsumible();
 		if(e == null) {
-			//cargarNivel(); corta el juego cuando carga en nivel, falta implementar como cambia
+			cargarNivel();
 		}
 		else {
 			if(grid[e.getPosition().getX()][e.getPosition().getY()] == null)
@@ -84,7 +86,7 @@ public class Grilla {
 			else 
 				grid[e.getPosition().getX()][e.getPosition().getY()].add(0, e);
 			elemento = e;
-		}		
+		}	
 	}
 	
 	public boolean estaVacia(Position pos) {
@@ -93,5 +95,9 @@ public class Grilla {
 	
 	public Ente getConsumible() {
 		return elemento;
+	}
+
+	public int getNivelN() {
+		return nivelN;
 	}
 }

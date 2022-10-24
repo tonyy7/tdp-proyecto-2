@@ -71,14 +71,7 @@ public class Snake implements Visitor{
 	public Position getPosicionCabeza() {
 		return cuerpo.getFirst().getPosition();
 	}
-
-	/*
-	 * @return posicion de la cola.
-	 */
-	public Position getPosicionCola() {
-		return cuerpo.getLast().getPosition();
-	}
-
+	
 	/*
 	 * @return direccion de snake.
 	 */
@@ -123,44 +116,49 @@ public class Snake implements Visitor{
 
 	public void visitAlimento1(Alimento1 a) {
 		juego.sumarPuntos(a.getPuntaje());
-		acarreo = acarreo+3;
+		acarreo += a.getBloque();
 	}
 
 	public void visitAlimento2(Alimento2 a) {
 		juego.sumarPuntos(a.getPuntaje());
-		acarreo = acarreo+4; 
+		acarreo += a.getBloque();
 	}
 
 	public void visitAlimento3(Alimento3 a) {
 		juego.sumarPuntos(a.getPuntaje());
+		acarreo += a.getBloque();
 	}
 
 	public void visitAlimento4(Alimento4 a) {
 		juego.sumarPuntos(a.getPuntaje());
+		acarreo += a.getBloque();
 	}
 
 	public void visitAlimento5(Alimento5 a) {
 		juego.sumarPuntos(a.getPuntaje());
+		acarreo += a.getBloque();
 	}
 
 	public void visitPowerUp1(PowerUp1 p) {
 		juego.sumarPuntos(p.getPuntaje());
 		cambiarSkin(p.getUrlCabeza(),p.getUrlCuerpo());
+		acarreo += p.getBloque();
 		
 	}
 
 	public void visitPowerUp2(PowerUp2 p) {
 		juego.sumarPuntos(p.getPuntaje());
 		cambiarSkin(p.getUrlCabeza(),p.getUrlCuerpo());
+		acarreo += p.getBloque();
 	}
 
 	public void visitPowerUp3(PowerUp3 p) {
 		juego.sumarPuntos(p.getPuntaje());
 		cambiarSkin(p.getUrlCabeza(),p.getUrlCuerpo());
+		acarreo += p.getBloque();
 	}
 
 	public void visitCuerpo(Cuerpo c) {
-		System.out.println("cuerpo");
 		juego.gameOver();
 	}
 

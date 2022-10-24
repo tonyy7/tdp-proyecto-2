@@ -10,7 +10,6 @@ import ente.EnteGrafico;
 import grilla.Grilla;
 import gui.GUI;
 import puntaje.Puntaje;
-import reloj.GameTimer;
 import reloj.Reloj;
 import splashScreen.SplashScreen;
 import splashScreen.SplashScreenGameOver;
@@ -21,12 +20,14 @@ public class Juego extends Thread{
 	protected Snake snake;
 	protected Grilla grilla;
 	protected Reloj timerVentana;
+	protected boolean run;
 	
 	
 	protected Puntaje puntajes;
 	
 	public Juego(Puntaje puntajes) {
 		puntajeActual = 0;
+		run = false;
 		this.puntajes = puntajes;
 		grilla = new Grilla(this);
 		timerVentana = new Reloj(this);
@@ -46,12 +47,20 @@ public class Juego extends Thread{
 	
 	public void run() {
 		while (true) {
-			moverCriatura();
-			try {
-				Thread.sleep(150);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			System.out.print("");
+			if(!run) {
+				timerVentana.pause();
+			}
+			else {
+				timerVentana.iniciar();
+			}
+			while(this.run) {
+				moverCriatura();
+				try {
+					Thread.sleep(150);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -71,13 +80,13 @@ public class Juego extends Thread{
 	}
 
 	public void updateCriatura(Position pos) {
+		this.run = true;
 		if(posValida(pos)) {
 			snake.setDireccion(pos);
-			//moverCriatura();
 		}
 	}
 	
-	public void moverCriatura() {
+	public void moverCriatura() {		
 		Position pos = snake.moverSnake();
 		if(grilla.getEnte(pos) != null) {
 			grilla.getEnte(pos).accept(snake);
@@ -112,10 +121,18 @@ public class Juego extends Thread{
 		ventana.setPuntaje(puntajeActual);
 	}
 	
+	public void cambiarNivel() {
+		pausa();		
+		ventana.cambiarNivel();			
+		initSnake();
+		grilla.setSnake(snake);
+		generateConsumible();
+		actualizarNivel();
+	}
+	
 	public void gameOver() {
-		//puntajes.setPuntaje(puntajeActual);
-		//timerVentana.stop(); NO USAR
-		
+		puntajes.setPuntaje(puntajeActual);
+		timerVentana.pause();
 		cerrar();
 	}
 	
@@ -127,9 +144,19 @@ public class Juego extends Thread{
 		ventana.setTiempo();
 	}
 	
+	public void pausa() {
+		if(this.run)
+			this.run = false;
+		else
+			this.run = true;
+	}
+	
+	public void actualizarNivel() {
+		ventana.setNivel(grilla.getNivelN());
+	}
+	
 	public void cerrar() {
 		new SplashScreen(4,"assets/gameover/gameover.png");
-		System.out.println("hola");
 		System.exit(0);
 	}
 	

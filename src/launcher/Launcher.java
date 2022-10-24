@@ -1,15 +1,8 @@
 package launcher;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import gui.GUI;
+import java.io.*;
 import juego.Juego;
 import puntaje.Puntaje;
-import reloj.Reloj;
-import splashScreen.SplashScreen;
 
 public class Launcher {
 	
@@ -18,15 +11,14 @@ public class Launcher {
 	public static void main(String[] args) {		
 		//new SplashScreen(3,"assets/splashScreen/SplashScreen.png");
 		
-		//Puntaje puntajeHistorico;
+		Puntaje puntajeHistorico;
 		try {
-			//puntajeHistorico = leerPuntaje();
-			new Juego(null);
+			puntajeHistorico = leerPuntaje();
+			new Juego(puntajeHistorico);			
+			guardarPuntaje(puntajeHistorico);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		//System.out.println((10+1)*30 - 328);
 	}
 	
 	public static void guardarPuntaje(Puntaje p) throws Exception {

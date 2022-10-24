@@ -9,15 +9,9 @@ import java.util.LinkedList;
 
 import Position.Position;
 import ente.Ente;
-import ente.alimento.Alimento1;
-import ente.alimento.Alimento2;
-import ente.alimento.Alimento3;
-import ente.alimento.Alimento4;
-import ente.alimento.Alimento5;
+import ente.alimento.*;
 import ente.pared.Pared;
-import ente.powerUp.PowerUp1;
-import ente.powerUp.PowerUp2;
-import ente.powerUp.PowerUp3;
+import ente.powerUp.*;
 import grilla.nivel.Nivel;
 
 public class GeneradorNivel implements FactoryLevel {
@@ -29,6 +23,11 @@ public class GeneradorNivel implements FactoryLevel {
 	 * como pared. 
 	 */
 	public GeneradorNivel() {
+		iniciarNivel();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void iniciarNivel() {
 		miNivel = (LinkedList<Ente>[][]) new LinkedList[60][60];
 		consumibles = new LinkedList<Ente>();
 		
@@ -62,7 +61,7 @@ public class GeneradorNivel implements FactoryLevel {
 	 * Generador de Nivel, recibe un string correspondiente a un archivo txt
 	 * 1,2,3,4,5 corresponden a Alimento1, Alimento3, etc
 	 * 6,7,8 corresponden a PowerUp1, PowerUp2, etc.
-	 * p corresponde a Pared
+	 * P corresponde a Pared
 	 * @return Nivel
 	 */
 	public Nivel generarNivel(String url) {
@@ -81,14 +80,6 @@ public class GeneradorNivel implements FactoryLevel {
 				switch(level.charAt(i)){
 				
 				case 'P':{
-					x = String.valueOf(level.charAt(i+2)) + String.valueOf(level.charAt(i+3));
-					y = String.valueOf(level.charAt(i+5)) + String.valueOf(level.charAt(i+6));
-					Pared p = new Pared(new Position(Integer.parseInt(x),Integer.parseInt(y)));
-					miNivel[p.getPosition().getX()][p.getPosition().getY()].addFirst(p);
-					i=i+6;
-				}break;
-				
-				case 'p':{
 					x = String.valueOf(level.charAt(i+2)) + String.valueOf(level.charAt(i+3));
 					y = String.valueOf(level.charAt(i+5)) + String.valueOf(level.charAt(i+6));
 					Pared p = new Pared(new Position(Integer.parseInt(x),Integer.parseInt(y)));
@@ -114,7 +105,7 @@ public class GeneradorNivel implements FactoryLevel {
 			
 				case'3':{
 					x = String.valueOf(level.charAt(i+2)) + String.valueOf(level.charAt(i+3));
-					y = String.valueOf(level.charAt(i+5)) + String.valueOf(level.charAt(i+6));
+					y = String.valueOf(level.charAt(i+5)) + String.valueOf(level.charAt(i+6));					
 					Alimento3 a = new Alimento3(new Position(Integer.parseInt(x),Integer.parseInt(y)));
 					consumibles.add(a);
 					i=i+6;
@@ -164,7 +155,7 @@ public class GeneradorNivel implements FactoryLevel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Collections.shuffle(consumibles);
+		Collections.shuffle(consumibles);		
 		
 		return new Nivel(miNivel, consumibles);
 	}

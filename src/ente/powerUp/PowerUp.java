@@ -5,7 +5,6 @@ import ente.EnteGrafico;
 
 public abstract class PowerUp extends Ente {
 	protected int puntaje;
-	protected EnteGrafico grafico;
 	private static final int bloque=3;
 	protected String urlCabeza;
 	protected String urlCuerpo;
@@ -24,9 +23,6 @@ public abstract class PowerUp extends Ente {
 	}
 	public int getPuntaje() {
 		return this.puntaje;
-	}
-	public EnteGrafico getEnteGrafico() {
-		return this.grafico;
 	}
 	public int getBloque() {return bloque;}
 	

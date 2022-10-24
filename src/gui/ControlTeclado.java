@@ -36,6 +36,11 @@ public class ControlTeclado {
 			juego.moverCriatura();
 			break;
 		}
+		case "pausa":
+		{
+			juego.pausa();
+			break;
+		}
 		case "salir":
 		{
 			//juego.cerrar();
