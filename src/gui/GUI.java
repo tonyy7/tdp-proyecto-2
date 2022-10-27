@@ -32,7 +32,7 @@ public class GUI extends JFrame {
 	private JTextPane textPaneTiempo;
 	private JTextPane textPanePuntos;
 	private JTextPane textPaneNivel;
-	
+	private JLabel lblNewLabel_2;
 	public GUI(Juego juego, Reloj timer) {
 		pared = new LinkedList<JLabel>();
 		snake = new LinkedList<JLabel>();
@@ -40,14 +40,15 @@ public class GUI extends JFrame {
 		this.juego = juego;
 		this.timer = timer;
 		teclado = new ControlTeclado(juego);
-		colorTexto = new Color(253, 255, 0);
-		colorFondo = new Color(6, 40, 61);
+		colorTexto = new Color(0, 0, 0);
+		//colorFondo = new Color(6, 40, 61);
+		colorFondo=new Color(169,169,169);
 		fuenteTexto = new Font("Arial", Font.BOLD, 14);
 		
 		getContentPane().setBackground(colorFondo);
 		setResizable(false);
 		setTitle("Snake TDP 2022");
-		ImageIcon icon = new ImageIcon("assets/snake/cabeza.png");
+		ImageIcon icon = new ImageIcon("assets/SplashScreen/Icon.png");
 		setIconImage(icon.getImage());
 		
 		getContentPane().setLayout(null);
@@ -57,8 +58,8 @@ public class GUI extends JFrame {
 		setLocationRelativeTo(null);		
 		
 		panelGrilla = new JPanel();
-		panelGrilla.setBackground(new Color(255, 244, 207));
 		panelGrilla.setBounds(10, 10, 600, 600);
+		panelGrilla.setOpaque(false);
 		panelGrilla.setLayout(null);
 		
 		textPanePuntos = new JTextPane();
@@ -85,6 +86,9 @@ public class GUI extends JFrame {
 		textPaneNivel.setBackground(colorFondo);
 		textPaneNivel.setBounds(638, 149, 130, 40);
 		
+		lblNewLabel_2 = new JLabel(new ImageIcon("assets/SplashScreen/controles.png"));
+		lblNewLabel_2.setBounds(620, 350, 150, 220);
+		getContentPane().add(lblNewLabel_2);
 		
 		setVisible(true);
 		initKeyBindings();
@@ -93,6 +97,11 @@ public class GUI extends JFrame {
 		getContentPane().add(textPaneTiempo);		
 		getContentPane().add(textPanePuntos);		
 		getContentPane().add(textPaneNivel);
+		
+		//Imagen de fondo.
+	    JLabel lblNewLabel_1 = new JLabel(new ImageIcon("assets/grilla/grillaoscura.png"));
+		lblNewLabel_1.setBounds(10, 10, 600, 600);
+		this.getContentPane().add(lblNewLabel_1);
 
 	}
 	
