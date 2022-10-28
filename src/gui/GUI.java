@@ -113,7 +113,7 @@ public class GUI extends JFrame {
 			for(int j=0; j<grillaGrafica[0].length; j++) {
 				if(grillaGrafica[i][j] != null) {
 					insert = new JLabel(new ImageIcon(grillaGrafica[i][j].getSkin()));
-					pared.addLast(insert);
+					pared.addLast(insert);  
 					panelGrilla.add(insert);
 					insert.setBounds((grillaGrafica[i][j].getPosicion().getX())*10,(grillaGrafica[i][j].getPosicion().getY())*10, 10, 10);
 				}

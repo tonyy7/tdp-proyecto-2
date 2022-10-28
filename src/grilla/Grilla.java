@@ -24,7 +24,7 @@ public class Grilla {
 	public Grilla(Juego juego) {
 		this.juego = juego;
 		generadorNivel = new GeneradorNivel();
-		nivelN = 1;
+		nivelN = 2;
 		nivelActual = generadorNivel.generarNivel("assets/niveles/nivel"+nivelN+".txt");
 		grid = nivelActual.getGrilla();		
 	}
