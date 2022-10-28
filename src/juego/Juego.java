@@ -9,40 +9,38 @@ import ente.Ente;
 import ente.EnteGrafico;
 import grilla.Grilla;
 import gui.GUI;
-import puntaje.Puntaje;
 import reloj.Reloj;
-import splashScreen.SplashScreen;
-import splashScreen.SplashScreenGameOver;
+import splashScreen.Ranking;
+import splashScreen.RankingGameOver;
 
 public class Juego extends Thread{
 	protected GUI ventana;
-	protected int puntajeActual; //puntaje actual del juego
+	protected int puntajeActual;
 	protected Snake snake;
 	protected Grilla grilla;
 	protected Reloj timerVentana;
+	protected Ranking ranking;
 	protected boolean run;
 	
-	
-	protected Puntaje puntajes;
-	
-	public Juego(Puntaje puntajes) {
-		puntajeActual = 0;
-		run = false;
-		this.puntajes = puntajes;
-		grilla = new Grilla(this);
-		timerVentana = new Reloj(this);
-		
-		
-		ventana = new GUI(this, timerVentana);
-		ventana.generarGrilla();
-		
-		
-		initSnake();
-		grilla.setSnake(snake);
-		generateConsumible();
-		
-		timerVentana.start();
-		this.start();
+	public Juego(Ranking puntaje) {
+		try {
+			puntajeActual = 0;			
+			ranking = puntaje;		
+			run = false;
+			grilla = new Grilla(this); 
+			timerVentana = new Reloj(this);			
+			ventana = new GUI(this, timerVentana);			
+			ventana.setNivel(grilla.getNivelN());
+			ventana.generarGrilla(); 
+			initSnake();
+			grilla.setSnake(snake);
+			generateConsumible();		
+			timerVentana.start();
+			this.start();
+			
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}
 	}
 	
 	public void run() {
@@ -126,14 +124,8 @@ public class Juego extends Thread{
 		ventana.cambiarNivel();			
 		initSnake();
 		grilla.setSnake(snake);
-		generateConsumible();
 		actualizarNivel();
-	}
-	
-	public void gameOver() {
-		puntajes.setPuntaje(puntajeActual);
-		timerVentana.pause();
-		cerrar();
+		generateConsumible();
 	}
 	
 	public int getPuntajeActaul() {
@@ -153,15 +145,27 @@ public class Juego extends Thread{
 	
 	public void actualizarNivel() {
 		ventana.setNivel(grilla.getNivelN());
+	}	
+
+	public EnteGrafico[][] getGrilla(){
+		EnteGrafico grillaGrafica[][] = new EnteGrafico[60][60];
+		LinkedList<Ente>[][] grillaLogica = grilla.getGrilla();
+		for(int i=0; i<grillaLogica.length; i++) {
+			for(int j=0; j<grillaLogica[0].length; j++) {
+				if(grillaLogica[i][j].getFirst() != null) 
+					grillaGrafica[i][j] = grillaLogica[i][j].getFirst().getGrafico();
+				else 
+					grillaGrafica[i][j] = null;							
+			}
+		}	
+		return grillaGrafica;
 	}
 	
-	public void cerrar() {
-		new SplashScreen(4,"assets/gameover/gameover.png");
-		System.exit(0);
-	}
-	
-	public LinkedList<Ente>[][] getGrilla(){
-		return grilla.getGrilla();
+	public void gameOver(boolean b) {
+		timerVentana.pause();
+		run = false;
+		ventana.close();
+		new RankingGameOver(this, ranking, b);
 	}
 	
 	private Position generatePosition(String dir) {
@@ -200,5 +204,5 @@ public class Juego extends Thread{
 				toReturn = false;
 		}
 		return toReturn;
-	}
+	}	
 }

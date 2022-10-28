@@ -1,8 +1,6 @@
 package gui;
 
 import javax.swing.*;
-
-import ente.Ente;
 import ente.EnteGrafico;
 import juego.Juego;
 import reloj.Reloj;
@@ -14,12 +12,12 @@ import java.util.LinkedList;
 import java.awt.Font;
 import java.awt.Point;
 
+@SuppressWarnings("serial")
 public class GUI extends JFrame {
-	protected final static int celdaSize = 30; //Tama�o de las celdas 30x30
+	protected final static int celdaSize = 30;
 	protected Juego juego;
 	protected ControlTeclado teclado;
 	protected JLabel lblPuntaje;
-	protected JLabel lblNewLabel;
 	protected JLabel ente;
 	protected Reloj timer;
 	protected LinkedList<JLabel> pared;
@@ -32,7 +30,10 @@ public class GUI extends JFrame {
 	private JTextPane textPaneTiempo;
 	private JTextPane textPanePuntos;
 	private JTextPane textPaneNivel;
-	private JLabel lblNewLabel_2;
+	private JLabel lblControles;
+	private JLabel lblBackground;
+	
+	
 	public GUI(Juego juego, Reloj timer) {
 		pared = new LinkedList<JLabel>();
 		snake = new LinkedList<JLabel>();
@@ -41,16 +42,18 @@ public class GUI extends JFrame {
 		this.timer = timer;
 		teclado = new ControlTeclado(juego);
 		colorTexto = new Color(0, 0, 0);
-		//colorFondo = new Color(6, 40, 61);
 		colorFondo=new Color(169,169,169);
 		fuenteTexto = new Font("Arial", Font.BOLD, 14);
 		
+		init();
+	}
+	
+	private void init() {
 		getContentPane().setBackground(colorFondo);
 		setResizable(false);
 		setTitle("Snake TDP 2022");
 		ImageIcon icon = new ImageIcon("assets/SplashScreen/Icon.png");
-		setIconImage(icon.getImage());
-		
+		setIconImage(icon.getImage());		
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(new Dimension(797, 658));
@@ -79,42 +82,40 @@ public class GUI extends JFrame {
 		textPaneTiempo.setBounds(638, 47, 130, 40);
 		
 		textPaneNivel = new JTextPane();
-		textPaneNivel.setText("NIVEL: 1");
+		textPaneNivel.setText("NIVEL:");
 		textPaneNivel.setForeground(colorTexto);
 		textPaneNivel.setFont(fuenteTexto);
 		textPaneNivel.setEditable(false);
 		textPaneNivel.setBackground(colorFondo);
 		textPaneNivel.setBounds(638, 149, 130, 40);
 		
-		lblNewLabel_2 = new JLabel(new ImageIcon("assets/SplashScreen/controles.png"));
-		lblNewLabel_2.setBounds(620, 350, 150, 220);
-		getContentPane().add(lblNewLabel_2);
+		lblControles = new JLabel(new ImageIcon("assets/SplashScreen/controles.png"));
+		lblControles.setBounds(620, 350, 150, 220);
 		
 		setVisible(true);
 		initKeyBindings();
 		
+		getContentPane().add(lblControles);
 		getContentPane().add(panelGrilla);		
 		getContentPane().add(textPaneTiempo);		
 		getContentPane().add(textPanePuntos);		
 		getContentPane().add(textPaneNivel);
 		
-		//Imagen de fondo.
-	    JLabel lblNewLabel_1 = new JLabel(new ImageIcon("assets/grilla/grillaoscura.png"));
-		lblNewLabel_1.setBounds(10, 10, 600, 600);
-		this.getContentPane().add(lblNewLabel_1);
-
+		lblBackground = new JLabel(new ImageIcon("assets/grilla/grillaoscura.png"));
+		lblBackground.setBounds(10, 10, 600, 600);		
+		this.getContentPane().add(lblBackground);
 	}
 	
 	public void generarGrilla() {
-		LinkedList<Ente>[][] grillaLogica = juego.getGrilla();
+		EnteGrafico grillaGrafica[][] = juego.getGrilla();
 		JLabel insert;
-		for(int i=0; i<60; i++) {
-			for(int j=0; j<60; j++) {
-				if(!grillaLogica[i][j].isEmpty() && grillaLogica[i][j].getFirst() != null) {
-					insert = new JLabel(new ImageIcon(grillaLogica[i][j].getFirst().getSkin()));
+		for(int i=0; i<grillaGrafica.length; i++) {
+			for(int j=0; j<grillaGrafica[0].length; j++) {
+				if(grillaGrafica[i][j] != null) {
+					insert = new JLabel(new ImageIcon(grillaGrafica[i][j].getSkin()));
 					pared.addLast(insert);
 					panelGrilla.add(insert);
-					insert.setBounds((grillaLogica[i][j].getFirst().getPosition().getX())*10,(grillaLogica[i][j].getFirst().getPosition().getY())*10, 10, 10);
+					insert.setBounds((grillaGrafica[i][j].getPosicion().getX())*10,(grillaGrafica[i][j].getPosicion().getY())*10, 10, 10);
 				}
 			}
 		}
@@ -180,6 +181,10 @@ public class GUI extends JFrame {
 	
 	public void setNivel(int n) {
 		textPaneNivel.setText("NIVEL: "+n);
+	}
+	
+	public void close() {
+		setVisible(false);
 	}
 	
 	private void initKeyBindings() {

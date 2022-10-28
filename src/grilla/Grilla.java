@@ -24,7 +24,7 @@ public class Grilla {
 	public Grilla(Juego juego) {
 		this.juego = juego;
 		generadorNivel = new GeneradorNivel();
-		nivelN = 4;
+		nivelN = 1;
 		nivelActual = generadorNivel.generarNivel("assets/niveles/nivel"+nivelN+".txt");
 		grid = nivelActual.getGrilla();		
 	}
@@ -66,7 +66,7 @@ public class Grilla {
 			juego.cambiarNivel();
 		}
 		else
-			juego.gameOver();
+			juego.gameOver(true);
 	}
 	
 	public Ente consumir(Ente a) {

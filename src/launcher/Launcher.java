@@ -2,37 +2,28 @@ package launcher;
 
 import java.io.*;
 import juego.Juego;
-import puntaje.Puntaje;
+import splashScreen.Ranking;
 
 public class Launcher {
 	
-	private static String file = "puntaje/puntaje.p";
+	private static String file = "ranking.r";
 
 	public static void main(String[] args) {		
 		//new SplashScreen(3,"assets/splashScreen/SplashScreen.png");
 		
-		Puntaje puntajeHistorico;
+		Ranking r;
 		try {
-			puntajeHistorico = leerPuntaje();
-			new Juego(puntajeHistorico);			
-			guardarPuntaje(puntajeHistorico);
+			r = leerPuntaje();
+			new Juego(r);		
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
-	public static void guardarPuntaje(Puntaje p) throws Exception {
-		FileOutputStream file = new FileOutputStream(Launcher.file);
-	    ObjectOutputStream out = new ObjectOutputStream(file);
-	    out.writeObject(p);
-	    out.close();
-	    file.close();
-	}
-	
-	public static Puntaje leerPuntaje() throws Exception {
+	public static Ranking leerPuntaje() throws Exception {
 	    FileInputStream file = new FileInputStream(Launcher.file);
 	    ObjectInputStream in = new ObjectInputStream(file);
-	    Puntaje book = (Puntaje) in.readObject();
+	    Ranking book = (Ranking) in.readObject();
 	    in.close();
 	    file.close();
 	    return book;

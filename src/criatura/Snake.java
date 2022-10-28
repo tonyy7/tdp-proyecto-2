@@ -159,10 +159,10 @@ public class Snake implements Visitor{
 	}
 
 	public void visitCuerpo(Cuerpo c) {
-		juego.gameOver();
+		juego.gameOver(false);
 	}
 
 	public void visitPared(Pared p) {
-		juego.gameOver();
+		juego.gameOver(false);
 	}
 }
