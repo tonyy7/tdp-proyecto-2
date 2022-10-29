@@ -89,6 +89,7 @@ public class Juego extends Thread{
 		if(grilla.getEnte(pos) != null) {
 			grilla.getEnte(pos).accept(snake);
 			ventana.eliminarConsumible();
+			grilla.removerEnte(pos);
 			generateConsumible();
 		}
 		setSnakeGrilla();		

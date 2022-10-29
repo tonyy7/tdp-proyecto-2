@@ -89,14 +89,6 @@ public class Snake implements Visitor{
 	}
 	
 	
-	/*
-	 * Agrega un bloque a snake en la posicion pos.
-	 */
-	//public void crecer(Position pos) {
-	//	Cuerpo insert = new Cuerpo(pos, urlCuerpo);
-	//	cuerpo.addLast(insert);
-	//}
-	
 	public LinkedList<Cuerpo> getCuerpo() {
         return cuerpo;
     }
