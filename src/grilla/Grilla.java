@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import Position.Position;
 import criatura.Snake;
 import ente.Ente;
-import factory.FactoryLevel;
 import factory.GeneradorNivel;
 import grilla.nivel.Nivel;
 import juego.Juego;
@@ -24,7 +23,7 @@ public class Grilla {
 	public Grilla(Juego juego) {
 		this.juego = juego;
 		generadorNivel = new GeneradorNivel();
-		nivelN = 2;
+		nivelN = 1;
 		nivelActual = generadorNivel.generarNivel("assets/niveles/nivel"+nivelN+".txt");
 		grid = nivelActual.getGrilla();		
 	}

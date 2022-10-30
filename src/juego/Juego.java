@@ -21,12 +21,14 @@ public class Juego extends Thread{
 	protected Reloj timerVentana;
 	protected Ranking ranking;
 	protected boolean run;
+	protected boolean controlTeclado;
 	
 	public Juego(Ranking puntaje) {
 		try {
 			puntajeActual = 0;			
 			ranking = puntaje;		
 			run = false;
+			controlTeclado = true;
 			grilla = new Grilla(this); 
 			timerVentana = new Reloj(this);			
 			ventana = new GUI(this, timerVentana);			
@@ -79,19 +81,21 @@ public class Juego extends Thread{
 
 	public void updateCriatura(Position pos) {
 		this.run = true;
-		if(posValida(pos)) {
+		if(posValida(pos) && controlTeclado) {
 			snake.setDireccion(pos);
+			controlTeclado = false;
 		}
 	}
 	
 	public void moverCriatura() {		
 		Position pos = snake.moverSnake();
-		if(grilla.getEnte(pos) != null) {
+		if(grilla.getEnte(pos) != null) {			
 			grilla.getEnte(pos).accept(snake);
 			ventana.eliminarConsumible();
 			grilla.removerEnte(pos);
 			generateConsumible();
 		}
+		controlTeclado = true;
 		setSnakeGrilla();		
 	}
 	
