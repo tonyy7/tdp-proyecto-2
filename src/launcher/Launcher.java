@@ -2,15 +2,15 @@ package launcher;
 
 import java.io.*;
 import juego.Juego;
-import splashScreen.Ranking;
+import ranking.Ranking;
+import splashScreen.SplashScreen;
 
 public class Launcher {
 	
 	private static String file = "ranking.r";
 
 	public static void main(String[] args) {		
-		//new SplashScreen(3,"assets/splashScreen/SplashScreen.png");
-		
+		new SplashScreen(3,"assets/splashScreen/SplashScreen.png");
 		Ranking r;
 		try {
 			r = leerPuntaje();
@@ -28,5 +28,12 @@ public class Launcher {
 	    file.close();
 	    return book;
 	}
-
+	
+	public static void guardarPuntaje(Ranking r) throws Exception {
+		FileOutputStream file = new FileOutputStream(Launcher.file);
+		ObjectOutputStream out = new ObjectOutputStream(file);
+		out.writeObject(r);
+	    out.close();
+	    file.close();
+	}
 }

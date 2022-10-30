@@ -1,4 +1,4 @@
-package splashScreen;
+package ranking;
 
 import java.io.Serializable;
 

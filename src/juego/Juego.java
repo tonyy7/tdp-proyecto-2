@@ -9,9 +9,8 @@ import ente.Ente;
 import ente.EnteGrafico;
 import grilla.Grilla;
 import gui.GUI;
+import ranking.*;
 import reloj.Reloj;
-import splashScreen.Ranking;
-import splashScreen.RankingGameOver;
 
 public class Juego extends Thread{
 	protected GUI ventana;

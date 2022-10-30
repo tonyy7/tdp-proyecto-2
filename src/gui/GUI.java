@@ -14,24 +14,23 @@ import java.awt.Point;
 
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
-	protected final static int celdaSize = 30;
 	protected Juego juego;
 	protected ControlTeclado teclado;
+	protected Reloj timer;
 	protected JLabel lblPuntaje;
 	protected JLabel ente;
-	protected Reloj timer;
+	protected JLabel lblControles;
+	protected JLabel lblBackground;
+	protected JTextPane textPaneTiempo;
+	protected JTextPane textPanePuntos;
+	protected JTextPane textPaneNivel;
+	protected JPanel panelGrilla;
+	protected Color colorTexto;
+	protected Color colorFondo;
+	protected Font fuenteTexto;
 	protected LinkedList<JLabel> pared;
 	protected LinkedList<JLabel> snake;
 	protected LinkedList<JLabel> consumibles;
-	protected JPanel panelGrilla;
-	private Color colorTexto;
-	private Color colorFondo;
-	private Font fuenteTexto;
-	private JTextPane textPaneTiempo;
-	private JTextPane textPanePuntos;
-	private JTextPane textPaneNivel;
-	private JLabel lblControles;
-	private JLabel lblBackground;
 	
 	
 	public GUI(Juego juego, Reloj timer) {

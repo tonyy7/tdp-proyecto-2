@@ -1,4 +1,4 @@
-package splashScreen;
+package ranking;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,17 +25,17 @@ public class RankingGameOver extends JFrame {
 	private Ranking puntaje;
 	private Juego juego;
 	private static int CANT_PUNTAJES = 5;
-	private JTextField textField;
 	private JLabel lblTitulo;
+	private JLabel lblGameEnd;
+	private JLabel lblIntegrantes;
+	private JLabel lblTituloRanking;
 	private JButton btnIngresarDatos;
 	private JTextPane textRanking;
-	private JLabel lblTituloRanking;
+	private JTextField textField;
 	private Color colorTexto;
 	private Color colorFondo;
 	private Font fuenteTexto;
 	private boolean control;
-	private JLabel lblGameEnd;
-	private JLabel lblIntegrantes;
 	
 	public RankingGameOver(Juego juego, Ranking puntaje, boolean estado) {
 		this.juego = juego;

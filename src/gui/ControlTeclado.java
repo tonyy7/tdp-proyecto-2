@@ -43,7 +43,7 @@ public class ControlTeclado {
 		}
 		case "salir":
 		{
-			//juego.cerrar();
+			juego.gameOver(false);
 			break;
 		}
 		}
