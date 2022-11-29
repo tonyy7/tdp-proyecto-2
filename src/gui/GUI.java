@@ -122,7 +122,7 @@ public class GUI extends JFrame {
 		getContentPane().add(textPaneNivel);
 		getContentPane().add(exit);
 		
-		lblBackground = new JLabel(new ImageIcon("assets/grilla/grillaoscura.png"));
+		lblBackground = new JLabel(new ImageIcon("assets/grilla/grilla.png"));
 		lblBackground.setBounds(10, 10, 600, 600);		
 		this.getContentPane().add(lblBackground);
 	}
