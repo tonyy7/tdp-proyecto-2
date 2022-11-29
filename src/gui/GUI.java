@@ -4,6 +4,8 @@ import javax.swing.*;
 import ente.EnteGrafico;
 import juego.Juego;
 import reloj.Reloj;
+import splashScreen.SplashScreen;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -11,6 +13,9 @@ import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
 
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
@@ -25,6 +30,7 @@ public class GUI extends JFrame {
 	protected JTextPane textPanePuntos;
 	protected JTextPane textPaneNivel;
 	protected JPanel panelGrilla;
+	protected JPanel exit;
 	protected Color colorTexto;
 	protected Color colorFondo;
 	protected Font fuenteTexto;
@@ -33,7 +39,7 @@ public class GUI extends JFrame {
 	protected LinkedList<JLabel> consumibles;
 	
 	
-	public GUI(Juego juego, Reloj timer) {
+	public GUI(Juego juego, Reloj timer) {		
 		pared = new LinkedList<JLabel>();
 		snake = new LinkedList<JLabel>();
 		consumibles = new LinkedList<JLabel>();
@@ -55,11 +61,12 @@ public class GUI extends JFrame {
 		setIconImage(icon.getImage());		
 		getContentPane().setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(797, 658));
+		setSize(new Dimension(790, 620));
 		setResizable(false);
 		setLocationRelativeTo(null);		
+		setUndecorated(true);
 		
-		panelGrilla = new JPanel();
+		panelGrilla = new JPanel();				
 		panelGrilla.setBounds(10, 10, 600, 600);
 		panelGrilla.setOpaque(false);
 		panelGrilla.setLayout(null);
@@ -88,10 +95,24 @@ public class GUI extends JFrame {
 		textPaneNivel.setBackground(colorFondo);
 		textPaneNivel.setBounds(638, 149, 130, 40);
 		
-		lblControles = new JLabel(new ImageIcon("assets/SplashScreen/controles.png"));
+		lblControles = new JLabel(new ImageIcon("assets/splashScreen/controles.png"));
 		lblControles.setBounds(620, 350, 150, 220);
 		
+		exit = new JPanel();
+		exit.setOpaque(false);
+		exit.setBounds(760, 5, 25, 25);
+		exit.setLayout(null);
+		JLabel boton=new JLabel(new ImageIcon("assets/gui/exit.png"));
+		boton.setSize(25,25);
+		exit.add(boton);		
+		exit.addMouseListener(new MouseAdapter() {			
+			public void mouseClicked(MouseEvent e) {
+				System.exit(0);
+			}
+		});
+		
 		setVisible(true);
+		setFocusable(true);
 		initKeyBindings();
 		
 		getContentPane().add(lblControles);
@@ -99,6 +120,7 @@ public class GUI extends JFrame {
 		getContentPane().add(textPaneTiempo);		
 		getContentPane().add(textPanePuntos);		
 		getContentPane().add(textPaneNivel);
+		getContentPane().add(exit);
 		
 		lblBackground = new JLabel(new ImageIcon("assets/grilla/grillaoscura.png"));
 		lblBackground.setBounds(10, 10, 600, 600);		
@@ -122,11 +144,12 @@ public class GUI extends JFrame {
 	}
 	
 	public void cambiarNivel() {
+		new SplashScreen(2, "assets/splashScreen/nextLevel.png");
 		pared.clear();
 		panelGrilla.removeAll();
 		panelGrilla.repaint();
 		snake.clear();
-		generarGrilla();		
+		generarGrilla();	
 	}
 	
 	public void actualizarCriatura(LinkedList<EnteGrafico> cuerpoSnake) {
@@ -187,12 +210,12 @@ public class GUI extends JFrame {
 	}
 	
 	private void initKeyBindings() {
-		addKeyListener(new KeyListener() {
+		addKeyListener(new KeyListener() {			
 			@Override
-			public void keyPressed(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {				
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_LEFT:
-					{
+					{						
 						teclado.generadorPosition("izquierda");
 						break;
 					}
