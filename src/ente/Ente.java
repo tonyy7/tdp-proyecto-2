@@ -11,6 +11,7 @@ public abstract class Ente {
 		return posicion;
 	}
 	public void setPosition(Position posicion) {
+		grafico.setPosicion(posicion);
 		this.posicion = posicion;
 	}
 	public EnteGrafico getGrafico() {

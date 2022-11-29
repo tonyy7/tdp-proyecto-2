@@ -155,7 +155,7 @@ public class GeneradorNivel implements FactoryLevel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Collections.shuffle(consumibles);		
+		//Collections.shuffle(consumibles);		
 		
 		return new Nivel(miNivel, consumibles);
 	}

@@ -134,8 +134,7 @@ public class Snake implements Visitor{
 	public void visitPowerUp1(PowerUp1 p) {
 		juego.sumarPuntos(p.getPuntaje());
 		cambiarSkin(p.getUrlCabeza(),p.getUrlCuerpo());
-		acarreo += p.getBloque();
-		
+		acarreo += p.getBloque();	
 	}
 
 	public void visitPowerUp2(PowerUp2 p) {
