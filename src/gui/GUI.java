@@ -146,10 +146,11 @@ public class GUI extends JFrame {
 	public void cambiarNivel() {
 		new SplashScreen(2, "assets/splashScreen/nextLevel.png");
 		pared.clear();
-		panelGrilla.removeAll();
-		panelGrilla.repaint();
 		snake.clear();
+		consumibles.clear();
+		panelGrilla.removeAll();
 		generarGrilla();	
+		panelGrilla.repaint();
 	}
 	
 	public void actualizarCriatura(LinkedList<EnteGrafico> cuerpoSnake) {
@@ -177,21 +178,22 @@ public class GUI extends JFrame {
 		}
 	}
 	
-	public void setConsumible(EnteGrafico e) {		
+	public void setConsumible(EnteGrafico e) {			
 		JLabel cons = new JLabel(new ImageIcon(e.getSkin()));
 		cons.setBounds(e.getPosicion().getX()*10, e.getPosicion().getY()*10, 10, 10);
-		panelGrilla.add(cons);
 		consumibles.addFirst(cons);
-		panelGrilla.repaint();
+		panelGrilla.add(cons);
+		panelGrilla.repaint();		
 	}
 	
-	public void eliminarConsumible() {
-		if(!consumibles.isEmpty()) {
-			panelGrilla.remove(consumibles.removeFirst());
-			panelGrilla.repaint();
-		}
+	public void eliminarConsumible() {		
+		panelGrilla.remove(consumibles.removeFirst());
+		panelGrilla.repaint();
 	}
 
+	public boolean consumiblesEmpty() {
+		return consumibles.isEmpty();
+	}
 	
 	public void setTiempo() {
 		textPaneTiempo.setText("TIEMPO: "+timer.getTime());

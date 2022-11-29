@@ -46,14 +46,15 @@ public class Juego extends Thread{
 	
 	public void run() {
 		while (true) {
-			System.out.print("");
+			System.out.print(""); 	
 			if(!run) {
 				timerVentana.pause();
+				
 			}
 			else {
 				timerVentana.iniciar();
 			}
-			while(this.run) {
+			if(run) {
 				moverCriatura();
 				try {
 					Thread.sleep(150);
@@ -61,6 +62,15 @@ public class Juego extends Thread{
 					e.printStackTrace();
 				}
 			}
+			/*
+			while(this.run) {
+				moverCriatura();
+				try {
+					Thread.sleep(150);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}*/
 		}
 	}
 	
@@ -72,10 +82,11 @@ public class Juego extends Thread{
 		setSnakeGrilla();
 	}
 	
-	private void generateConsumible() {
+	private void generateConsumible() {		
 		grilla.spawnConsumible();
-		if(grilla.getConsumible().getGrafico() != null)
-			ventana.setConsumible(grilla.getConsumible().getGrafico());
+		if(grilla.getConsumible() != null && ventana.consumiblesEmpty()) {
+			ventana.setConsumible(grilla.getConsumible().getGrafico());					
+		}
 	}
 
 	public void updateCriatura(Position pos) {
@@ -91,7 +102,7 @@ public class Juego extends Thread{
 		if(grilla.getEnte(pos) != null) {			
 			grilla.getEnte(pos).accept(snake);
 			ventana.eliminarConsumible();
-			grilla.removerEnte(pos);
+			grilla.removerEnte(pos);			
 			generateConsumible();
 		}
 		controlTeclado = true;
@@ -124,12 +135,11 @@ public class Juego extends Thread{
 	}
 	
 	public void cambiarNivel() {
-		pausa();		
+		run = false;		
 		ventana.cambiarNivel();			
-		initSnake();
-		grilla.setSnake(snake);
+		initSnake();		
 		actualizarNivel();
-		generateConsumible();
+		generateConsumible();  
 	}
 	
 	public int getPuntajeActaul() {
@@ -145,6 +155,7 @@ public class Juego extends Thread{
 			this.run = false;
 		else
 			this.run = true;
+		System.out.println(run);
 	}
 	
 	public void actualizarNivel() {
