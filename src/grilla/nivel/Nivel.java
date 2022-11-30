@@ -23,5 +23,4 @@ public class Nivel {
 			e = consumibles.removeFirst();
 		return e;
 	}
-	
 }

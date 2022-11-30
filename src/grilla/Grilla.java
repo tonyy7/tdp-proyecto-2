@@ -104,6 +104,7 @@ public class Grilla {
 	}
 	
 	public Ente getConsumible() {
+		juego.updateSpeed();
 		return elemento;
 	}
 

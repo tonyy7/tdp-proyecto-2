@@ -21,11 +21,15 @@ public class Juego extends Thread{
 	protected Ranking ranking;
 	protected boolean run;
 	protected boolean controlTeclado;
+	private int DEFAULT_SPEED = 150;
+	private int DEFAULT_MAX_SPEED = 30;
+	private int speed;
 	
 	public Juego(Ranking puntaje) {
 		try {
 			puntajeActual = 0;			
 			ranking = puntaje;		
+			speed = DEFAULT_SPEED;
 			run = false;
 			controlTeclado = true;
 			grilla = new Grilla(this); 
@@ -45,8 +49,7 @@ public class Juego extends Thread{
 	}
 	
 	public void run() {
-		while (true) {
-			System.out.print(""); 	
+		while (true) {			
 			if(!run) {
 				timerVentana.pause();
 				
@@ -57,20 +60,11 @@ public class Juego extends Thread{
 			if(run) {
 				moverCriatura();
 				try {
-					Thread.sleep(150);
+					Thread.sleep(speed);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			/*
-			while(this.run) {
-				moverCriatura();
-				try {
-					Thread.sleep(150);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}*/
 		}
 	}
 	
@@ -136,6 +130,7 @@ public class Juego extends Thread{
 	
 	public void cambiarNivel() {
 		run = false;		
+		speed = DEFAULT_SPEED;
 		ventana.cambiarNivel();			
 		initSnake();		
 		actualizarNivel();
@@ -174,6 +169,12 @@ public class Juego extends Thread{
 			}
 		}	
 		return grillaGrafica;
+	}
+	
+	public void updateSpeed() {
+		if(speed > DEFAULT_MAX_SPEED) {
+			speed -= 2;
+		}
 	}
 	
 	public void gameOver(boolean b) {

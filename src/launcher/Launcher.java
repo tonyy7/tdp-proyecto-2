@@ -12,7 +12,7 @@ public class Launcher {
 	public static void main(String[] args) {		
 		new SplashScreen(3,"assets/splashScreen/SplashScreen.png");
 		Ranking r;
-		try {
+		try {  
 			r = leerPuntaje();
 			new Juego(r);		
 		} catch (Exception e) {

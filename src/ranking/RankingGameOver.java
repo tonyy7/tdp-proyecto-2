@@ -19,6 +19,8 @@ import TDAColaCP.*;
 import juego.Juego;
 
 import javax.swing.JTextPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class RankingGameOver extends JFrame {
@@ -76,6 +78,16 @@ public class RankingGameOver extends JFrame {
 		btnIngresarDatos.setBounds(36, 146, 196, 23);
 		btnIngresarDatos.setForeground(colorTexto);
 		btnIngresarDatos.setFont(fuenteTexto);
+		btnIngresarDatos.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(control) {
+						ingresarDatos();
+						control = false;
+					}
+				}
+			}
+		});
 		btnIngresarDatos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(control) {
