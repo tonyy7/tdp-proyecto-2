@@ -10,62 +10,37 @@ import ente.EnteGrafico;
 import grilla.Grilla;
 import gui.GUI;
 import ranking.*;
+import reloj.GameTimer;
 import reloj.Reloj;
+import sonido.Sonidos;
 
-public class Juego extends Thread{
+public class Juego {
 	protected GUI ventana;
-	protected int puntajeActual;
 	protected Snake snake;
 	protected Grilla grilla;
 	protected Reloj timerVentana;
 	protected Ranking ranking;
-	protected boolean run;
+	protected Sonidos sonidos_juego;
+	protected GameTimer gameTimer;
 	protected boolean controlTeclado;
-	private int DEFAULT_SPEED = 150;
-	private int DEFAULT_MAX_SPEED = 30;
-	private int speed;
+	protected int puntajeActual;
 	
 	public Juego(Ranking puntaje) {
-		try {
-			puntajeActual = 0;			
-			ranking = puntaje;		
-			speed = DEFAULT_SPEED;
-			run = false;
-			controlTeclado = true;
-			grilla = new Grilla(this); 
-			timerVentana = new Reloj(this);			
-			ventana = new GUI(this, timerVentana);			
-			ventana.setNivel(grilla.getNivelN());
-			ventana.generarGrilla(); 
-			initSnake();
-			grilla.setSnake(snake);
-			generateConsumible();		
-			timerVentana.start();
-			this.start();
-			
-		} catch (Exception e) {			
-			e.printStackTrace();
-		}
-	}
-	
-	public void run() {
-		while (true) {			
-			if(!run) {
-				timerVentana.pause();
-				
-			}
-			else {
-				timerVentana.iniciar();
-			}
-			if(run) {
-				moverCriatura();
-				try {
-					Thread.sleep(speed);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		puntajeActual = 0;			
+		ranking = puntaje;		
+		sonidos_juego = new Sonidos();
+		controlTeclado = true;
+		grilla = new Grilla(this); 
+		timerVentana = new Reloj(this);
+		gameTimer = new GameTimer(this);
+		ventana = new GUI(this, timerVentana);			
+		ventana.setNivel(grilla.getNivelN());
+		ventana.generarGrilla(); 
+		initSnake();
+		grilla.setSnake(snake);
+		generateConsumible();		
+		timerVentana.start();
+		gameTimer.start();		
 	}
 	
 	private void initSnake() {
@@ -84,9 +59,10 @@ public class Juego extends Thread{
 	}
 
 	public void updateCriatura(Position pos) {
-		this.run = true;
+		gameTimer.play();
 		if(posValida(pos) && controlTeclado) {
 			snake.setDireccion(pos);
+			sonidos_juego.playMoveSong();
 			controlTeclado = false;
 		}
 	}
@@ -96,6 +72,7 @@ public class Juego extends Thread{
 		if(grilla.getEnte(pos) != null) {			
 			grilla.getEnte(pos).accept(snake);
 			ventana.eliminarConsumible();
+			sonidos_juego.playConsumibleSong();
 			grilla.removerEnte(pos);			
 			generateConsumible();
 		}
@@ -129,8 +106,8 @@ public class Juego extends Thread{
 	}
 	
 	public void cambiarNivel() {
-		run = false;		
-		speed = DEFAULT_SPEED;
+		gameTimer.pause();
+		gameTimer.setDefaultSpeed();
 		ventana.cambiarNivel();			
 		initSnake();		
 		actualizarNivel();
@@ -146,11 +123,20 @@ public class Juego extends Thread{
 	}
 	
 	public void pausa() {
-		if(this.run)
-			this.run = false;
-		else
-			this.run = true;
-		System.out.println(run);
+		sonidos_juego.playPauseSong();
+		gameTimer.playPause();
+	}
+	
+	public void pauseTimerVentana() {
+		timerVentana.pause();
+	}
+	
+	public boolean playPauseMusic() {
+		return sonidos_juego.playPausaSong();
+	}
+	
+	public void playTimerVentana() {
+		timerVentana.iniciar();
 	}
 	
 	public void actualizarNivel() {
@@ -172,16 +158,18 @@ public class Juego extends Thread{
 	}
 	
 	public void updateSpeed() {
-		if(speed > DEFAULT_MAX_SPEED) {
-			speed -= 2;
-		}
+		gameTimer.updateSpeed();
 	}
 	
-	public void gameOver(boolean b) {
+	public void gameOver(boolean estado) {
+		if(estado) 
+			sonidos_juego.playWinnerSong();
+		else
+			sonidos_juego.playGameOverSong();
 		timerVentana.pause();
-		run = false;
+		gameTimer.pause();
 		ventana.close();
-		new RankingGameOver(this, ranking, b);
+		new RankingGameOver(this, ranking, estado);
 	}
 	
 	private Position generatePosition(String dir) {

@@ -8,6 +8,8 @@ import splashScreen.SplashScreen;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
@@ -15,7 +17,6 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.KeyAdapter;
 
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
@@ -34,6 +35,9 @@ public class GUI extends JFrame {
 	protected Color colorTexto;
 	protected Color colorFondo;
 	protected Font fuenteTexto;
+	protected JButton buttonMusic;	
+	protected ImageIcon playMusic;
+	protected ImageIcon stopMusic;
 	protected LinkedList<JLabel> pared;
 	protected LinkedList<JLabel> snake;
 	protected LinkedList<JLabel> consumibles;
@@ -49,6 +53,8 @@ public class GUI extends JFrame {
 		colorTexto = new Color(0, 0, 0);
 		colorFondo=new Color(169,169,169);
 		fuenteTexto = new Font("Arial", Font.BOLD, 14);
+		playMusic = new ImageIcon("assets/gui/playMusic.png");
+		stopMusic = new ImageIcon("assets/gui/stopMusic.png");
 		
 		init();
 	}
@@ -98,6 +104,13 @@ public class GUI extends JFrame {
 		lblControles = new JLabel(new ImageIcon("assets/splashScreen/controles.png"));
 		lblControles.setBounds(620, 350, 150, 220);
 		
+		buttonMusic = new JButton(playMusic);
+		buttonMusic.setBounds(665, 220, 70, 70);
+		buttonMusic.setOpaque(false);
+		buttonMusic.setContentAreaFilled(false);	
+		buttonMusic.setBorder(null);
+		buttonMusic.setVisible(true);
+		
 		exit = new JPanel();
 		exit.setOpaque(false);
 		exit.setBounds(760, 5, 25, 25);
@@ -111,20 +124,23 @@ public class GUI extends JFrame {
 			}
 		});
 		
-		setVisible(true);
-		setFocusable(true);
-		initKeyBindings();
+		lblBackground = new JLabel(new ImageIcon("assets/grilla/grilla.png"));
+		lblBackground.setBounds(10, 10, 600, 600);		
 		
+		getContentPane().add(buttonMusic);
 		getContentPane().add(lblControles);
 		getContentPane().add(panelGrilla);		
 		getContentPane().add(textPaneTiempo);		
 		getContentPane().add(textPanePuntos);		
 		getContentPane().add(textPaneNivel);
 		getContentPane().add(exit);
+		getContentPane().add(lblBackground);
 		
-		lblBackground = new JLabel(new ImageIcon("assets/grilla/grilla.png"));
-		lblBackground.setBounds(10, 10, 600, 600);		
-		this.getContentPane().add(lblBackground);
+		setVisible(true);
+		setFocusable(true);
+		initKeyBindings();
+		
+		
 	}
 	
 	public void generarGrilla() {
@@ -249,6 +265,16 @@ public class GUI extends JFrame {
 					case KeyEvent.VK_ESCAPE:
 					{
 						teclado.generadorPosition("salir");
+						break;
+					}
+					case KeyEvent.VK_S:
+					{
+						if(!juego.playPauseMusic()) {
+							buttonMusic.setIcon(stopMusic);
+						}
+						else {
+							buttonMusic.setIcon(playMusic);
+						}
 						break;
 					}
 				}
