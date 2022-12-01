@@ -46,7 +46,6 @@ public class Juego extends Thread{
 	
 	public void run() {
 		while (true) {
-			System.out.print(""); 	
 			if(!run) {
 				timerVentana.pause();
 				
@@ -62,15 +61,6 @@ public class Juego extends Thread{
 					e.printStackTrace();
 				}
 			}
-			/*
-			while(this.run) {
-				moverCriatura();
-				try {
-					Thread.sleep(150);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}*/
 		}
 	}
 	
@@ -155,7 +145,6 @@ public class Juego extends Thread{
 			this.run = false;
 		else
 			this.run = true;
-		System.out.println(run);
 	}
 	
 	public void actualizarNivel() {
